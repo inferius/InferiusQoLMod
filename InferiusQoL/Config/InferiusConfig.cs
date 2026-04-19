@@ -148,9 +148,13 @@ public class InferiusConfig : ConfigFile
     [Slider("  Tier 3 multiplier (%)", 100, 300, DefaultValue = 230, Step = 10, Order = 703)]
     public int TankWelderT3Percent = 230;
 
+    [Slider("  Tier 4 multiplier (%)", 100, 400, DefaultValue = 230, Step = 10, Order = 704)]
+    public int TankWelderT4Percent = 230;
+
     [JsonIgnore] public float TankWelderT1Multiplier => TankWelderT1Percent / 100f;
     [JsonIgnore] public float TankWelderT2Multiplier => TankWelderT2Percent / 100f;
     [JsonIgnore] public float TankWelderT3Multiplier => TankWelderT3Percent / 100f;
+    [JsonIgnore] public float TankWelderT4Multiplier => TankWelderT4Percent / 100f;
 
     // =====================================================================
     // Batteries rework

@@ -98,11 +98,16 @@ public static class BackpackItems
     /// </summary>
     public static void RegisterTabs()
     {
-        // Displayname = klic do Language systemu (registrujeme preklady v Localization/L.cs).
+        // CraftTree tab labels se rendruji primo bez Language lookupu (na rozdil od
+        // Options sliderů). Musime label rozhodnout imperativne pri registraci,
+        // L.GetOrFallback udela lookup v Language.main nebo vrati anglicky fallback.
+        var label = InferiusQoL.Localization.L.GetOrFallback(
+            "InferiusQoL.Tab.BackpackUpgrades",
+            "Backpack Upgrades");
         Nautilus.Handlers.CraftTreeHandler.AddTabNode(
             CraftTree.Type.Workbench,
             "BackpackMenu",
-            "InferiusQoL.Tab.BackpackUpgrades",
+            label,
             SpriteManager.Get(TechType.LuggageBag));
     }
 

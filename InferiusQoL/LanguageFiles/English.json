@@ -3,6 +3,7 @@
 
   "InferiusQoL.Tab.SeamothTurboUpgrades": "Seamoth Turbo Upgrades",
   "InferiusQoL.Tab.BackpackUpgrades": "Backpack Upgrades",
+  "InferiusQoL.Tab.TankWelder": "Merged Tanks",
 
   "Debug verbosity": "Debug verbosity",
   "Enlarge player inventory": "Enlarge player inventory",
@@ -35,6 +36,7 @@
   "  Tier 1 multiplier (%)": "  Tier 1 multiplier (%)",
   "  Tier 2 multiplier (%)": "  Tier 2 multiplier (%)",
   "  Tier 3 multiplier (%)": "  Tier 3 multiplier (%)",
+  "  Tier 4 multiplier (%)": "  Tier 4 multiplier (%)",
   "Enable battery rework": "Enable battery rework",
   "  Vanilla Battery capacity": "  Vanilla Battery capacity",
   "  Vanilla Power Cell capacity": "  Vanilla Power Cell capacity",
@@ -89,5 +91,14 @@
   "Tooltip_InferiusBackpackMedium": "Mid-tier backpack with more extra rows. Crafted in the Modification Station; consumes a Small Backpack. Equip in a Chip slot.",
 
   "InferiusBackpackLarge": "Large Backpack",
-  "Tooltip_InferiusBackpackLarge": "Endgame backpack with the most extra rows. Crafted in the Modification Station; consumes a Medium Backpack. Equip in a Chip slot."
+  "Tooltip_InferiusBackpackLarge": "Endgame backpack with the most extra rows. Crafted in the Modification Station; consumes a Medium Backpack. Equip in a Chip slot.",
+
+  "InferiusMergedTankT1": "Merged Ultra Tank T1",
+  "Tooltip_InferiusMergedTankT1": "Combined oxygen tank. Capacity = 2x Plasteel Tank x T1 multiplier. Configurable in mod options.",
+  "InferiusMergedTankT2": "Merged Ultra Tank T2",
+  "Tooltip_InferiusMergedTankT2": "Higher-capacity merged tank. Recipe unlocked after crafting T1.",
+  "InferiusMergedTankT3": "Merged Ultra Tank T3",
+  "Tooltip_InferiusMergedTankT3": "Endgame merged tank with the highest capacity. Recipe unlocked after crafting T2.",
+  "InferiusMergedTankT4": "Lightweight Merged Tank T4",
+  "Tooltip_InferiusMergedTankT4": "Lightweight endgame merged tank - same capacity as T3 but without swim speed penalty. Recipe unlocked after crafting T3; consumes a T3 tank."
 }

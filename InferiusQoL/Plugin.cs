@@ -9,6 +9,7 @@ using InferiusQoL.Config;
 using InferiusQoL.Console;
 using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Features.SeamothTurbo;
+using InferiusQoL.Features.TankWelder;
 using InferiusQoL.Localization;
 using InferiusQoL.Logging;
 
@@ -63,6 +64,12 @@ public class Plugin : BaseUnityPlugin
             // InventoryResizePatch.ApplyTo).
             BackpackItems.RegisterTabs();
             BackpackItems.Register();
+        }
+
+        if (cfg.TankWelderEnabled)
+        {
+            TankWelderItems.RegisterTabs();
+            TankWelderItems.Register();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

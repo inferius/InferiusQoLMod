@@ -93,4 +93,19 @@ public static class L
 
     /// <summary>Je klic zaregistrovany v nekterem jazyce?</summary>
     public static bool HasKey(string key) => _registeredKeys.Contains(key);
+
+    /// <summary>
+    /// Prelozi klic pomoci Language systemu. Pokud klic neni nalezen (nebo
+    /// Language.main jeste neni ready), vrati <paramref name="englishFallback"/>.
+    /// Pouzit pro CraftTree tab labels, ktere se rendruji primo bez Language lookupu
+    /// - musime label rozhodnout imperativne pri registraci.
+    /// </summary>
+    public static string GetOrFallback(string key, string englishFallback)
+    {
+        if (Language.main == null) return englishFallback;
+        var translated = Language.main.Get(key);
+        if (string.IsNullOrEmpty(translated)) return englishFallback;
+        if (translated == key) return englishFallback;
+        return translated;
+    }
 }

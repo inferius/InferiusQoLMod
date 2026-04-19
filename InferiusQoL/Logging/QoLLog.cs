@@ -15,7 +15,8 @@ public enum Category
     Compressor,
     TankWelder,
     Battery,
-    Teleport
+    Teleport,
+    Oxygen
 }
 
 public enum Verbosity

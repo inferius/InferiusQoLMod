@@ -32,10 +32,13 @@ public static class SeamothTurboItems
     {
         // Vlastni tab v Modification Station (Workbench) pro MK2/MK3.
         // Pridavame drive nez registrujeme prefabs, at ma craft tree cilovy tab.
+        var label = InferiusQoL.Localization.L.GetOrFallback(
+            "InferiusQoL.Tab.SeamothTurboUpgrades",
+            "Seamoth Turbo Upgrades");
         Nautilus.Handlers.CraftTreeHandler.AddTabNode(
             CraftTree.Type.Workbench,
             "SeamothTurboMenu",
-            "InferiusQoL.Tab.SeamothTurboUpgrades",
+            label,
             SpriteManager.Get(TechType.SeamothElectricalDefense));
 
         // MK1 - ve Vehicle Upgrade Console (Moonpool), vedle vanilla Seamoth modulu.
