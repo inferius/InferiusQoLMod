@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>MoreModifiedItems</AssemblyName>
+		<Product>More Modified Items</Product>
+		<Version>2.0.5</Version>
+		<OutputPath>$(SolutionDir)bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Update="Assets\ScubaManifold.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>

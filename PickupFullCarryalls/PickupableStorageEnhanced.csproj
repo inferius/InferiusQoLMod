@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>PickupableStorageEnhanced</AssemblyName>
+		<Product>Pickupable Storage Enhanced</Product>
+		<Version>2.0.0.1</Version>
+		<OutputPath>$(SolutionDir)bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+	</PropertyGroup>
+</Project>
