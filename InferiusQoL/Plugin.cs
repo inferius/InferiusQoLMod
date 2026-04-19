@@ -9,6 +9,7 @@ using InferiusQoL.Config;
 using InferiusQoL.Console;
 using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Features.Batteries;
+using InferiusQoL.Features.Compressor;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Features.TankWelder;
 using InferiusQoL.Localization;
@@ -77,6 +78,13 @@ public class Plugin : BaseUnityPlugin
         {
             BatteryItems.RegisterTabs();
             BatteryItems.Register();
+        }
+
+        if (cfg.CompressorEnabled)
+        {
+            CompressorBlacklist.LoadFromJson();
+            CompressorItem.RegisterTabs();
+            CompressorItem.Register();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

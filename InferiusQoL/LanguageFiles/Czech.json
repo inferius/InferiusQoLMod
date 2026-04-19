@@ -5,6 +5,7 @@
   "InferiusQoL.Tab.BackpackUpgrades": "Vylepšení batohů",
   "InferiusQoL.Tab.TankWelder": "Spojené lahve",
   "InferiusQoL.Tab.BatteryUpgrades": "Vylepšené baterie",
+  "InferiusQoL.Tab.Compressor": "Lis inventáře",
 
   "Debug verbosity": "Úroveň debug výpisu",
   "Enlarge player inventory": "Zvětšit inventář hráče",
@@ -118,5 +119,8 @@
   "InferiusHyperBattery": "Hyper baterie",
   "Tooltip_InferiusHyperBattery": "Endgame baterie s nejvyšší kapacitou. Spotřebuje Ion baterii + Magnetite + Kyanite + Aerogel.",
   "InferiusHyperPowerCell": "Hyper Power Cell",
-  "Tooltip_InferiusHyperPowerCell": "Endgame Power Cell s nejvyšší kapacitou. Spotřebuje 2 Hyper baterie."
+  "Tooltip_InferiusHyperPowerCell": "Endgame Power Cell s nejvyšší kapacitou. Spotřebuje 2 Hyper baterie.",
+
+  "InferiusCompressor": "Lis inventáře",
+  "Tooltip_InferiusCompressor": "Pokročilý chip, který zmenšuje položky v inventáři na 1x1 (kromě baterií, lahví, ryb a vajíček). Osaď do Chip slotu. Komprese zůstává i po odsazení chipu."
 }
