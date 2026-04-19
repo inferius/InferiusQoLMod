@@ -80,20 +80,20 @@ public class InferiusConfig : ConfigFile
     [Slider("  MK1 speed (%)", 100, 500, DefaultValue = 200, Step = 10, Order = 401)]
     public int SeamothTurboMK1SpeedPercent = 200;
 
-    [Slider("  MK1 energy drain (%)", 100, 1000, DefaultValue = 300, Step = 25, Order = 402)]
-    public int SeamothTurboMK1EnergyPercent = 300;
+    [Slider("  MK1 energy drain (%)", 100, 1500, DefaultValue = 450, Step = 25, Order = 402)]
+    public int SeamothTurboMK1EnergyPercent = 450;
 
     [Slider("  MK2 speed (%)", 100, 600, DefaultValue = 330, Step = 10, Order = 403)]
     public int SeamothTurboMK2SpeedPercent = 330;
 
-    [Slider("  MK2 energy drain (%)", 100, 1500, DefaultValue = 600, Step = 25, Order = 404)]
-    public int SeamothTurboMK2EnergyPercent = 600;
+    [Slider("  MK2 energy drain (%)", 100, 2000, DefaultValue = 900, Step = 25, Order = 404)]
+    public int SeamothTurboMK2EnergyPercent = 900;
 
     [Slider("  MK3 speed (%)", 100, 700, DefaultValue = 430, Step = 10, Order = 405)]
     public int SeamothTurboMK3SpeedPercent = 430;
 
-    [Slider("  MK3 energy drain (%)", 100, 2500, DefaultValue = 1200, Step = 50, Order = 406)]
-    public int SeamothTurboMK3EnergyPercent = 1200;
+    [Slider("  MK3 energy drain (%)", 100, 3500, DefaultValue = 1800, Step = 50, Order = 406)]
+    public int SeamothTurboMK3EnergyPercent = 1800;
 
     [Slider("  Surface falloff distance (m)", 0, 60, DefaultValue = 30, Step = 1, Order = 407)]
     public int SeamothTurboSurfaceFalloffMeters = 30;
@@ -169,11 +169,11 @@ public class InferiusConfig : ConfigFile
     [Slider("  Vanilla Power Cell capacity", 50, 400, DefaultValue = 100, Step = 10, Order = 802)]
     public int VanillaPowerCellCapacity = 100;
 
-    [Slider("  Reinforced Battery capacity", 100, 400, DefaultValue = 200, Step = 10, Order = 803)]
-    public int ReinforcedBatteryCapacity = 200;
+    [Slider("  Reinforced Battery capacity", 100, 500, DefaultValue = 250, Step = 10, Order = 803)]
+    public int ReinforcedBatteryCapacity = 250;
 
-    [Slider("  Reinforced Power Cell capacity", 200, 800, DefaultValue = 400, Step = 20, Order = 804)]
-    public int ReinforcedPowerCellCapacity = 400;
+    [Slider("  Reinforced Power Cell capacity", 200, 1000, DefaultValue = 500, Step = 20, Order = 804)]
+    public int ReinforcedPowerCellCapacity = 500;
 
     [Slider("  Hyper Battery capacity", 1000, 3000, DefaultValue = 1500, Step = 50, Order = 805)]
     public int HyperBatteryCapacity = 1500;

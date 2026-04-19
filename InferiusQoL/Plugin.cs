@@ -8,6 +8,7 @@ using HarmonyLib;
 using InferiusQoL.Config;
 using InferiusQoL.Console;
 using InferiusQoL.Features.Backpacks;
+using InferiusQoL.Features.Batteries;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Features.TankWelder;
 using InferiusQoL.Localization;
@@ -70,6 +71,12 @@ public class Plugin : BaseUnityPlugin
         {
             TankWelderItems.RegisterTabs();
             TankWelderItems.Register();
+        }
+
+        if (cfg.BatteryReworkEnabled)
+        {
+            BatteryItems.RegisterTabs();
+            BatteryItems.Register();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

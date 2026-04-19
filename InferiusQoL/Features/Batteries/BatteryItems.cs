@@ -1,0 +1,206 @@
+namespace InferiusQoL.Features.Batteries;
+
+using System.Collections.Generic;
+using InferiusQoL.Config;
+using InferiusQoL.Logging;
+using Nautilus.Assets;
+using Nautilus.Assets.Gadgets;
+using Nautilus.Assets.PrefabTemplates;
+using Nautilus.Crafting;
+using UnityEngine;
+
+/// <summary>
+/// Battery rework - pridava 4 nove TechTypes:
+///   Reinforced Battery (tier mezi vanilla Battery a Ion Battery)
+///   Reinforced Power Cell
+///   Hyper Battery (late-game strop)
+///   Hyper Power Cell
+///
+/// Kapacita se nastavuje pri spawn prefabu pres CloneTemplate.ModifyPrefab
+/// (stejny pattern jako merged tanks - Harmony Awake patch na Battery neni
+/// spolehlivy pro clone prefab).
+///
+/// Recept:
+///   Reinforced Battery: vanilla Battery + Ruby x2 + Magnetite + WiringKit
+///   Reinforced Power Cell: 2x Reinforced Battery + Silicone + WiringKit
+///   Hyper Battery: Ion Battery + Magnetite x2 + Kyanite + Aerogel
+///   Hyper Power Cell: 2x Hyper Battery + Silicone + AdvancedWiringKit
+/// </summary>
+public static class BatteryItems
+{
+    public static TechType ReinforcedBattery { get; private set; } = TechType.None;
+    public static TechType ReinforcedPowerCell { get; private set; } = TechType.None;
+    public static TechType HyperBattery { get; private set; } = TechType.None;
+    public static TechType HyperPowerCell { get; private set; } = TechType.None;
+
+    public static void RegisterTabs()
+    {
+        var label = InferiusQoL.Localization.L.GetOrFallback(
+            "InferiusQoL.Tab.BatteryUpgrades",
+            "Battery Upgrades");
+        QoLLog.Info(Category.Battery,
+            $"Adding craft tree tab 'BatteryUpgradesMenu' with label '{label}' to Workbench");
+        Nautilus.Handlers.CraftTreeHandler.AddTabNode(
+            CraftTree.Type.Workbench,
+            "BatteryUpgradesMenu",
+            label,
+            SpriteManager.Get(TechType.PrecursorIonBattery));
+    }
+
+    public static void Register()
+    {
+        var cfg = InferiusConfig.Instance;
+
+        // ============================================================
+        // Reinforced Battery (mezistupen mezi Battery a Ion Battery)
+        // ============================================================
+        ReinforcedBattery = RegisterBattery(
+            classId: "InferiusReinforcedBattery",
+            displayName: "Reinforced Battery",
+            description: "Higher-capacity battery. Mid-game tier.",
+            cloneFrom: TechType.Battery,
+            unlockAfter: TechType.Battery,
+            capacity: cfg.ReinforcedBatteryCapacity,
+            isPowerCell: false,
+            isHyper: false,
+            recipe: new RecipeData
+            {
+                craftAmount = 1,
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient(TechType.Battery, 1),
+                    new Ingredient(TechType.AluminumOxide, 2),
+                    new Ingredient(TechType.Magnetite, 1),
+                    new Ingredient(TechType.WiringKit, 1),
+                }
+            });
+
+        ReinforcedPowerCell = RegisterBattery(
+            classId: "InferiusReinforcedPowerCell",
+            displayName: "Reinforced Power Cell",
+            description: "Higher-capacity power cell. Mid-game tier.",
+            cloneFrom: TechType.PowerCell,
+            unlockAfter: TechType.PowerCell,
+            capacity: cfg.ReinforcedPowerCellCapacity,
+            isPowerCell: true,
+            isHyper: false,
+            recipe: new RecipeData
+            {
+                craftAmount = 1,
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient(ReinforcedBattery, 2),
+                    new Ingredient(TechType.Silicone, 1),
+                    new Ingredient(TechType.WiringKit, 1),
+                }
+            });
+
+        // ============================================================
+        // Hyper Battery/Cell (endgame strop, nad Ion)
+        // ============================================================
+        HyperBattery = RegisterBattery(
+            classId: "InferiusHyperBattery",
+            displayName: "Hyper Battery",
+            description: "Endgame battery. Highest capacity available.",
+            cloneFrom: TechType.PrecursorIonBattery,
+            unlockAfter: TechType.PrecursorIonBattery,
+            capacity: cfg.HyperBatteryCapacity,
+            isPowerCell: false,
+            isHyper: true,
+            recipe: new RecipeData
+            {
+                craftAmount = 1,
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient(TechType.PrecursorIonBattery, 1),
+                    new Ingredient(TechType.Magnetite, 2),
+                    new Ingredient(TechType.Kyanite, 1),
+                    new Ingredient(TechType.Aerogel, 1),
+                }
+            });
+
+        HyperPowerCell = RegisterBattery(
+            classId: "InferiusHyperPowerCell",
+            displayName: "Hyper Power Cell",
+            description: "Endgame power cell. Highest capacity available.",
+            cloneFrom: TechType.PrecursorIonPowerCell,
+            unlockAfter: TechType.PrecursorIonPowerCell,
+            capacity: cfg.HyperPowerCellCapacity,
+            isPowerCell: true,
+            isHyper: true,
+            recipe: new RecipeData
+            {
+                craftAmount = 1,
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient(HyperBattery, 2),
+                    new Ingredient(TechType.Silicone, 1),
+                    new Ingredient(TechType.AdvancedWiringKit, 1),
+                }
+            });
+
+        QoLLog.Info(Category.Battery,
+            $"Registered Batteries: Reinforced {ReinforcedBattery}/{ReinforcedPowerCell}, Hyper {HyperBattery}/{HyperPowerCell}");
+    }
+
+    private static TechType RegisterBattery(
+        string classId,
+        string displayName,
+        string description,
+        TechType cloneFrom,
+        TechType unlockAfter,
+        int capacity,
+        bool isPowerCell,
+        RecipeData recipe,
+        bool isHyper)
+    {
+        var info = PrefabInfo.WithTechType(classId, displayName, description);
+        info.WithIcon(SpriteManager.Get(cloneFrom));
+
+        var prefab = new CustomPrefab(info);
+
+        var cloneTemplate = new CloneTemplate(info, cloneFrom)
+        {
+            ModifyPrefab = (obj) => ConfigureBatteryPrefab(obj, classId, capacity),
+        };
+        prefab.SetGameObject(cloneTemplate);
+
+        prefab.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
+        prefab.SetUnlock(unlockAfter);
+
+        var crafting = prefab.SetRecipe(recipe).WithCraftingTime(5f);
+
+        if (isHyper)
+        {
+            // Hyper tier = endgame v Modification Station, vlastni tab
+            crafting.WithFabricatorType(CraftTree.Type.Workbench)
+                .WithStepsToFabricatorTab("BatteryUpgradesMenu");
+        }
+        else
+        {
+            // Reinforced tier = standardni Fabricator, Resources/Electronics
+            // (vedle vanilla Battery/PowerCell)
+            crafting.WithFabricatorType(CraftTree.Type.Fabricator)
+                .WithStepsToFabricatorTab("Resources", "Electronics");
+        }
+
+        prefab.Register();
+        return info.TechType;
+    }
+
+    private static void ConfigureBatteryPrefab(GameObject obj, string classId, int newCapacity)
+    {
+        var battery = obj.GetComponent<Battery>();
+        if (battery == null)
+        {
+            QoLLog.Error(Category.Battery, $"ModifyPrefab {classId}: Battery component NOT FOUND!");
+            return;
+        }
+
+        var oldCapacity = battery._capacity;
+        battery._capacity = newCapacity;
+        battery._charge = newCapacity; // fully charged on craft
+        QoLLog.Info(Category.Battery,
+            $"ModifyPrefab {classId}: capacity {oldCapacity:0.0} -> {newCapacity}");
+    }
+}

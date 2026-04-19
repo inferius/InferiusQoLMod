@@ -4,6 +4,7 @@
   "InferiusQoL.Tab.SeamothTurboUpgrades": "Turbo moduly Seamoth",
   "InferiusQoL.Tab.BackpackUpgrades": "Vylepšení batohů",
   "InferiusQoL.Tab.TankWelder": "Spojené lahve",
+  "InferiusQoL.Tab.BatteryUpgrades": "Vylepšené baterie",
 
   "Debug verbosity": "Úroveň debug výpisu",
   "Enlarge player inventory": "Zvětšit inventář hráče",
@@ -108,5 +109,14 @@
   "InferiusMergedTankT3": "Spojená Ultra lahev T3",
   "Tooltip_InferiusMergedTankT3": "Endgame spojená lahev s nejvyšší kapacitou. Recept odemknut po craftu T2.",
   "InferiusMergedTankT4": "Odlehčená spojená lahev T4",
-  "Tooltip_InferiusMergedTankT4": "Odlehčená endgame spojená lahev - stejná kapacita jako T3, ale bez penalty na rychlost plavání. Recept odemknut po craftu T3, spotřebuje T3 lahev."
+  "Tooltip_InferiusMergedTankT4": "Odlehčená endgame spojená lahev - stejná kapacita jako T3, ale bez penalty na rychlost plavání. Recept odemknut po craftu T3, spotřebuje T3 lahev.",
+
+  "InferiusReinforcedBattery": "Vylepšená baterie",
+  "Tooltip_InferiusReinforcedBattery": "Baterie s vyšší kapacitou. Craft ve Vylepšovací stanici z vanilla baterie + Ruby + Magnetite + Wiring Kit.",
+  "InferiusReinforcedPowerCell": "Vylepšený Power Cell",
+  "Tooltip_InferiusReinforcedPowerCell": "Power Cell s vyšší kapacitou. Spotřebuje 2 Vylepšené baterie.",
+  "InferiusHyperBattery": "Hyper baterie",
+  "Tooltip_InferiusHyperBattery": "Endgame baterie s nejvyšší kapacitou. Spotřebuje Ion baterii + Magnetite + Kyanite + Aerogel.",
+  "InferiusHyperPowerCell": "Hyper Power Cell",
+  "Tooltip_InferiusHyperPowerCell": "Endgame Power Cell s nejvyšší kapacitou. Spotřebuje 2 Hyper baterie."
 }
