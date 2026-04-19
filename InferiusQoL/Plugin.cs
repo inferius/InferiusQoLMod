@@ -7,6 +7,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using InferiusQoL.Config;
 using InferiusQoL.Console;
+using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Localization;
 using InferiusQoL.Logging;
@@ -30,6 +31,7 @@ public class Plugin : BaseUnityPlugin
     internal static bool HasCustomizedStorage { get; private set; }
     internal static bool HasAdvancedInventory { get; private set; }
     internal static bool HasBagEquipment { get; private set; }
+    internal static bool HasSlotExtender { get; private set; }
 
     private void Awake()
     {
@@ -53,6 +55,16 @@ public class Plugin : BaseUnityPlugin
         if (cfg.SeamothTurboEnabled)
             SeamothTurboItems.Register();
 
+        if (cfg.BackpacksEnabled && !HasBagEquipment)
+        {
+            // Detekce BagEquipment probiha az ve Start(); zde volame optimisticky
+            // registraci. Pokud BagEquipment je pozdeji detekovan, nase batohy
+            // stale existuji v craft tree, ale neaplikuji se (gate v
+            // InventoryResizePatch.ApplyTo).
+            BackpackItems.RegisterTabs();
+            BackpackItems.Register();
+        }
+
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");
     }
 
@@ -72,10 +84,15 @@ public class Plugin : BaseUnityPlugin
         HasCustomizedStorage = FindPlugin(new[] { "customizedstorage" }, out var csInfo);
         HasAdvancedInventory = FindPlugin(new[] { "advancedinventory" }, out var aiInfo);
         HasBagEquipment = FindPlugin(new[] { "bagequipment" }, out var beInfo);
+        HasSlotExtender = FindPlugin(new[] { "slotextender" }, out var seInfo);
 
         LogDetection("CustomizedStorage", "locker resize", HasCustomizedStorage, csInfo);
         LogDetection("AdvancedInventory", "scrollable container", HasAdvancedInventory, aiInfo);
         LogDetection("BagEquipment", "batohy", HasBagEquipment, beInfo);
+        if (HasSlotExtender)
+            QoLLog.Info(Category.Core, $"SlotExtender detected: {seInfo} - extra Chip slots available for backpacks.");
+        else
+            QoLLog.Info(Category.Core, "SlotExtender not detected - backpack will occupy your single vanilla Chip slot (trade-off with Compass).");
     }
 
     private static bool FindPlugin(string[] needles, out string info)

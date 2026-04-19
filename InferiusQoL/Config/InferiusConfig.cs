@@ -60,14 +60,14 @@ public class InferiusConfig : ConfigFile
     [Toggle("Enable backpacks", Order = 300)]
     public bool BackpacksEnabled = true;
 
-    [Slider("  Small backpack capacity (slots)", 2, 16, DefaultValue = 4, Step = 1, Order = 301)]
-    public int BackpackSmallCapacity = 4;
+    [Slider("  Small backpack extra rows", 1, 4, DefaultValue = 1, Step = 1, Order = 301)]
+    public int BackpackSmallRows = 1;
 
-    [Slider("  Medium backpack capacity (slots)", 4, 24, DefaultValue = 8, Step = 1, Order = 302)]
-    public int BackpackMediumCapacity = 8;
+    [Slider("  Medium backpack extra rows", 1, 6, DefaultValue = 2, Step = 1, Order = 302)]
+    public int BackpackMediumRows = 2;
 
-    [Slider("  Large backpack capacity (slots)", 6, 32, DefaultValue = 12, Step = 1, Order = 303)]
-    public int BackpackLargeCapacity = 12;
+    [Slider("  Large backpack extra rows", 1, 8, DefaultValue = 3, Step = 1, Order = 303)]
+    public int BackpackLargeRows = 3;
 
     // =====================================================================
     // Seamoth turbo

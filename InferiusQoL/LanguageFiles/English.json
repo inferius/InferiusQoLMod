@@ -1,6 +1,10 @@
 {
   "InferiusQoL.ModName": "Inferius Quality of Life",
 
+  "InferiusQoL.Tab.SeamothTurboUpgrades": "Seamoth Turbo Upgrades",
+  "InferiusQoL.Tab.BackpackUpgrades": "Backpack Upgrades",
+
+
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Verbosity: {0}",
   "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detected: {0}",
@@ -31,5 +35,14 @@
   "Tooltip_InferiusSeamothTurboMK2": "Improved turbo with a higher speed cap and drain. Consumes a MK1 module during crafting. Late mid-game tier.",
 
   "InferiusSeamothTurboMK3": "Seamoth Turbo Module MK3",
-  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo with the highest boost and heaviest drain. Consumes a MK2 module during crafting."
+  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo with the highest boost and heaviest drain. Consumes a MK2 module during crafting.",
+
+  "InferiusBackpackSmall": "Small Backpack",
+  "Tooltip_InferiusBackpackSmall": "A compact backpack. Equip in a Chip slot to gain extra inventory rows. SlotExtender recommended.",
+
+  "InferiusBackpackMedium": "Medium Backpack",
+  "Tooltip_InferiusBackpackMedium": "Mid-tier backpack with more extra rows. Crafted in the Modification Station; consumes a Small Backpack. Equip in a Chip slot.",
+
+  "InferiusBackpackLarge": "Large Backpack",
+  "Tooltip_InferiusBackpackLarge": "Endgame backpack with the most extra rows. Crafted in the Modification Station; consumes a Medium Backpack. Equip in a Chip slot."
 }

@@ -1,6 +1,10 @@
 {
   "InferiusQoL.ModName": "Inferius Quality of Life",
 
+  "InferiusQoL.Tab.SeamothTurboUpgrades": "Turbo moduly Seamoth",
+  "InferiusQoL.Tab.BackpackUpgrades": "Vylepšení batohů",
+
+
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Úroveň logování: {0}",
   "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detekován: {0}",
@@ -31,5 +35,14 @@
   "Tooltip_InferiusSeamothTurboMK2": "Vylepšené turbo s vyšším rychlostním stropem a spotřebou. Craft spotřebuje MK1 modul. Late mid-game tier.",
 
   "InferiusSeamothTurboMK3": "Seamoth Turbo Modul MK3",
-  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo s nejvyšším zrychlením a spotřebou. Craft spotřebuje MK2 modul."
+  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo s nejvyšším zrychlením a spotřebou. Craft spotřebuje MK2 modul.",
+
+  "InferiusBackpackSmall": "Malý batoh",
+  "Tooltip_InferiusBackpackSmall": "Kompaktní batoh. Osaď do Chip slotu pro extra řádky inventáře. Doporučujeme SlotExtender.",
+
+  "InferiusBackpackMedium": "Střední batoh",
+  "Tooltip_InferiusBackpackMedium": "Střední batoh s více extra řádky. Craft ve Vylepšovací stanici, spotřebuje Malý batoh. Osaď do Chip slotu.",
+
+  "InferiusBackpackLarge": "Velký batoh",
+  "Tooltip_InferiusBackpackLarge": "Endgame batoh s nejvíce extra řádky. Craft ve Vylepšovací stanici, spotřebuje Střední batoh. Osaď do Chip slotu."
 }

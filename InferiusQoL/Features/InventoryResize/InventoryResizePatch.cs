@@ -3,6 +3,7 @@ namespace InferiusQoL.Features.InventoryResize;
 
 using HarmonyLib;
 using InferiusQoL.Config;
+using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Logging;
 
 [HarmonyPatch(typeof(Inventory), nameof(Inventory.Awake))]
@@ -26,7 +27,37 @@ public static class InventoryResizePatch
                 $"Vanilla inventory size recorded: {_vanillaWidth}x{_vanillaHeight}");
         }
 
+        // Hook na equipment changes - aby osazeni/odsazeni batohu spustilo inventory resize
+        // bez nutnosti restartu nebo zmeny configu.
+        HookEquipmentEvents(__instance);
+
         ApplyTo(__instance, InferiusConfig.Instance);
+    }
+
+    private static bool _equipmentEventsHooked = false;
+
+    private static void HookEquipmentEvents(Inventory inv)
+    {
+        if (_equipmentEventsHooked) return;
+        if (inv?.equipment == null) return;
+
+        inv.equipment.onEquip += OnEquipmentChanged;
+        inv.equipment.onUnequip += OnEquipmentChanged;
+        _equipmentEventsHooked = true;
+        QoLLog.Debug(Category.Inventory, "Equipment events hooked (onEquip/onUnequip)");
+    }
+
+    private static void OnEquipmentChanged(string slot, InventoryItem item)
+    {
+        // Reagujeme jen na nase batohy - jiny equipment change nam je jedno.
+        if (item?.item == null) return;
+        var tt = item.item.GetTechType();
+        if (tt != Backpacks.BackpackItems.Small
+            && tt != Backpacks.BackpackItems.Medium
+            && tt != Backpacks.BackpackItems.Large) return;
+
+        QoLLog.Debug(Category.Inventory, $"Backpack equipment change ({slot}, {tt}) - reapplying inventory");
+        ApplyRuntime();
     }
 
     public static void ApplyRuntime(InferiusConfig? cfg = null)
@@ -62,6 +93,16 @@ public static class InventoryResizePatch
         {
             targetW = _vanillaWidth;
             targetH = _vanillaHeight;
+        }
+
+        // Bonus z batohu osazeneho v Player equipment (Chip slot).
+        if (cfg.BackpacksEnabled && !Plugin.HasBagEquipment)
+        {
+            var tier = BackpackItems.GetEquippedTier();
+            if (tier != BackpackTier.None)
+            {
+                targetH += BackpackItems.GetTierRows(tier, cfg);
+            }
         }
 
         var curW = inv.container.sizeX;
