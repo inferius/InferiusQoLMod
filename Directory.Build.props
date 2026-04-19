@@ -48,6 +48,12 @@
       <Private>False</Private>
     </Reference>
 
+    <!-- JSON library (soucasti hry v Managed folderu) -->
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(GameManagedDir)\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
     <!-- Herní assembly -->
     <Reference Include="Assembly-CSharp">
       <!--<HintPath>$(GameManagedDir)\Assembly-CSharp.dll</HintPath>-->

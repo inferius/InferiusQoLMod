@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>InferiusQoL</AssemblyName>
+		<Product>Inferius Quality of Life</Product>
+		<Version>0.1.0</Version>
+		<OutputPath>$(SolutionDir)bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+		<RootNamespace>InferiusQoL</RootNamespace>
+		<DeployToGame Condition="'$(DeployToGame)' == ''">true</DeployToGame>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="LanguageFiles\**\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<Target Name="DeployToGamePlugins" AfterTargets="Build" Condition="'$(DeployToGame)' == 'true' And '$(Configuration)' == 'Subnautica' And Exists('$(BepInExDir)\plugins')">
+		<ItemGroup>
+			<_LangFiles Include="$(TargetDir)LanguageFiles\**\*.json" />
+		</ItemGroup>
+		<MakeDir Directories="$(BepInExDir)\plugins\InferiusQoL" />
+		<MakeDir Directories="$(BepInExDir)\plugins\InferiusQoL\LanguageFiles" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(BepInExDir)\plugins\InferiusQoL\" SkipUnchangedFiles="false" />
+		<Copy SourceFiles="$(TargetDir)$(AssemblyName).pdb" DestinationFolder="$(BepInExDir)\plugins\InferiusQoL\" SkipUnchangedFiles="false" Condition="Exists('$(TargetDir)$(AssemblyName).pdb')" />
+		<Copy SourceFiles="@(_LangFiles)" DestinationFolder="$(BepInExDir)\plugins\InferiusQoL\LanguageFiles\" SkipUnchangedFiles="false" />
+		<Message Text="InferiusQoL deployed to $(BepInExDir)\plugins\InferiusQoL\" Importance="high" />
+	</Target>
+</Project>

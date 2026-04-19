@@ -2,7 +2,18 @@
 
 | Name | Version | Description | Source Code |
 |-|-|-|-|
-| [Instant Bulkhead Animations](https://nexusmods.com/subnautica/mods/221) | 1.0.0 | Skips the bulkhead animation and makes it look like a Minecraft door | [here](InstantBulkheadAnimations/Mod.cs) |
-| [More Modified Items](https://www.nexusmods.com/subnautica/mods/398) | 1.0.0 | Adds a Lightweight Ultra Capacity Tank, Ultra Glide Swim Charge Fins, a Enhanced Stillsuit, a Reinforced Stillsuit and the Scuba Manifold  | [here](MoreModifiedItems/Mod.cs) |
-| [No Menu Pause](https://www.nexusmods.com/subnautica/mods/360) | 1.0.0 | Makes the game not pause when the ESC pause menu is opened | [here](NoMenuPause/Mod.cs)
-| [Pickupable Storage Enhanced](https://www.nexusmods.com/subnautica/mods/220) | 1.0.0 | Allows you to pickup carry-alls and waterproof lockers which are not empty, and even open them from your inventory! | [here](PickupFullCarryalls/Mod.cs) |
+| **Inferius Quality of Life** | 0.1.0 | Modularni QoL balicek: vetsi inventar, batohy, lis, retriever terminal, Seamoth turbo, spojovani lahvi, rework baterii, teleport beacon | [here](InferiusQoL/Plugin.cs) |
+
+## Status
+
+Ranne stadium - aktualne jen scaffolding (config framework, logging, console commands).
+Jednotlive featury se implementuji postupne.
+
+### Console commands (Subnautica `~` konzole)
+
+- `qol_status` - prehled stavu vsech featur
+- `qol_log_level <None|Info|Debug|Trace>` - runtime zmena verbosity
+- `qol_retriever_rescan`, `qol_retriever_dump` - retriever diagnostika
+- `qol_seamoth_boost_state` - Seamoth turbo diagnostika
+- `qol_teleport_list` - seznam teleport beacons
+- `qol_migrate_batteries` - force migrace baterii po reworku

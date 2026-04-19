@@ -1,0 +1,26 @@
+{
+  "InferiusQoL.ModName": "Inferius Quality of Life",
+
+  "InferiusQoL.Status.Header": "InferiusQoL v{0}",
+  "InferiusQoL.Status.Verbosity": "Úroveň logování: {0}",
+  "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detekován: {0}",
+  "InferiusQoL.Status.AdvancedInventory": "AdvancedInventory detekován: {0}",
+  "InferiusQoL.Status.BagEquipment": "BagEquipment detekován: {0}",
+  "InferiusQoL.Status.Features": "Funkce:",
+  "InferiusQoL.Status.InventoryResize": "Zvětšení inventáře:",
+  "InferiusQoL.Status.LockerResize": "Zvětšení skříní:",
+  "InferiusQoL.Status.Backpacks": "Batohy:",
+  "InferiusQoL.Status.SeamothTurbo": "Seamoth Turbo:",
+  "InferiusQoL.Status.Retriever": "Retriever:",
+  "InferiusQoL.Status.Compressor": "Lis:",
+  "InferiusQoL.Status.TankWelder": "Spojování lahví:",
+  "InferiusQoL.Status.BatteryRework": "Rework baterií:",
+  "InferiusQoL.Status.TeleportBeacon": "Teleport Beacon:",
+
+  "InferiusQoL.Console.LogLevelCurrent": "Aktuální úroveň logu: {0}. Použití: qol_log_level <None|Info|Debug|Trace>",
+  "InferiusQoL.Console.LogLevelSet": "Úroveň logu nastavena na: {0}",
+  "InferiusQoL.Console.NotImplemented": "Funkce není zatím implementována: {0}",
+
+  "InferiusQoL.On": "ZAP",
+  "InferiusQoL.Off": "vyp"
+}

@@ -1,0 +1,26 @@
+{
+  "InferiusQoL.ModName": "Inferius Quality of Life",
+
+  "InferiusQoL.Status.Header": "InferiusQoL v{0}",
+  "InferiusQoL.Status.Verbosity": "Verbosity: {0}",
+  "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detected: {0}",
+  "InferiusQoL.Status.AdvancedInventory": "AdvancedInventory detected: {0}",
+  "InferiusQoL.Status.BagEquipment": "BagEquipment detected: {0}",
+  "InferiusQoL.Status.Features": "Features:",
+  "InferiusQoL.Status.InventoryResize": "InventoryResize:",
+  "InferiusQoL.Status.LockerResize": "LockerResize:",
+  "InferiusQoL.Status.Backpacks": "Backpacks:",
+  "InferiusQoL.Status.SeamothTurbo": "SeamothTurbo:",
+  "InferiusQoL.Status.Retriever": "Retriever:",
+  "InferiusQoL.Status.Compressor": "Compressor:",
+  "InferiusQoL.Status.TankWelder": "TankWelder:",
+  "InferiusQoL.Status.BatteryRework": "BatteryRework:",
+  "InferiusQoL.Status.TeleportBeacon": "TeleportBeacon:",
+
+  "InferiusQoL.Console.LogLevelCurrent": "Current log level: {0}. Usage: qol_log_level <None|Info|Debug|Trace>",
+  "InferiusQoL.Console.LogLevelSet": "Log level set to: {0}",
+  "InferiusQoL.Console.NotImplemented": "Feature not yet implemented: {0}",
+
+  "InferiusQoL.On": "ON",
+  "InferiusQoL.Off": "off"
+}

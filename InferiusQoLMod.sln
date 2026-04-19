@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.5.11626.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreModifiedItems", "MoreModifiedItems\MoreModifiedItems.csproj", "{2622E390-D206-4FB5-BC4C-1443363F5A5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InferiusQoL", "InferiusQoL\InferiusQoL.csproj", "{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Subnautica|Any CPU = Subnautica|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2622E390-D206-4FB5-BC4C-1443363F5A5F}.BelowZero|Any CPU.ActiveCfg = BelowZero|Any CPU
-		{2622E390-D206-4FB5-BC4C-1443363F5A5F}.BelowZero|Any CPU.Build.0 = BelowZero|Any CPU
-		{2622E390-D206-4FB5-BC4C-1443363F5A5F}.Subnautica|Any CPU.ActiveCfg = Subnautica|Any CPU
-		{2622E390-D206-4FB5-BC4C-1443363F5A5F}.Subnautica|Any CPU.Build.0 = Subnautica|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.BelowZero|Any CPU.ActiveCfg = BelowZero|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.BelowZero|Any CPU.Build.0 = BelowZero|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Subnautica|Any CPU.ActiveCfg = Subnautica|Any CPU
+		{A1B2C3D4-E5F6-4789-ABCD-EF0123456789}.Subnautica|Any CPU.Build.0 = Subnautica|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
