@@ -83,6 +83,7 @@ public class Plugin : BaseUnityPlugin
         if (cfg.CompressorEnabled)
         {
             CompressorBlacklist.LoadFromJson();
+            CompressorSaveManager.Load();
             CompressorItem.RegisterTabs();
             CompressorItem.Register();
         }

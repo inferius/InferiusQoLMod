@@ -7,40 +7,50 @@ using InferiusQoL.Config;
 using InferiusQoL.Logging;
 
 /// <summary>
-/// Pri osazeni/odsazeni Compressor chipu projdeme items v Player inventari a
-/// refreshnem (remove + add) jen ty, kterych se komprese realne tyka:
+/// Dva listenery na Player inventory:
 ///
-///   - Ne-blacklistovane items s vanilla velikosti > 1x1
-///   - A soucasnou velikosti v inventari, ktera nesedi s cilovou velikosti
+/// 1. equipment.onEquip - pri osazeni Compressor chipu projdeme vsechny
+///    eligible items v inventari, oznacime jejich instance a refresh.
+///    (Bulk compression existujicich itemu.)
 ///
-/// Typicky jsou to 5-10 itemu (batoh, scanner, welder, propulsion cannon atd.),
-/// ne stovky. Refresh je rychly.
+/// 2. container.onAddItem - kdyz hrac pickne novy item a chip je osazen,
+///    automaticky oznacime novou instanci a refreshneme. (Continuous
+///    compression pro nove pickups.)
+///
+/// Flag _isRefreshing zabrani rekurzi - nase RemoveItem/AddItem by jinak
+/// znovu trigger onAddItem event.
 /// </summary>
 [HarmonyPatch(typeof(Inventory), nameof(Inventory.Awake))]
 public static class Compressor_Inventory_Awake_Patch
 {
     private static bool _hooked = false;
+    private static bool _isRefreshing = false;
 
     [HarmonyPostfix]
     public static void Postfix(Inventory __instance)
     {
         if (_hooked) return;
         if (__instance?.equipment == null) return;
+        if (__instance.container == null) return;
 
-        // Napoji jen onEquip. Odsazeni chipu ZAMERNE nic neodlisuje - jednou slisovane
-        // items zustavaji 1x1. Dava to smysl gameplay-wise: chip je permanentni upgrade
-        // inventare, ne toggle.
         __instance.equipment.onEquip += OnEquipmentChipEquipped;
+        __instance.container.onAddItem += OnPlayerContainerItemAdded;
         _hooked = true;
 
-        QoLLog.Debug(Category.Compressor, "Compressor onEquip listener hooked (unequip does not un-compress)");
+        QoLLog.Debug(Category.Compressor,
+            "Compressor listeners hooked: equipment.onEquip + container.onAddItem");
     }
+
+    // ============================================================
+    // Bulk compression on chip equip
+    // ============================================================
 
     private static void OnEquipmentChipEquipped(string slot, InventoryItem item)
     {
         if (!IsOurChip(item)) return;
-        QoLLog.Info(Category.Compressor, $"Compressor equipped ({slot}) - compressing eligible inventory items");
-        RefreshInventoryItemSizes(targetCompressed: true);
+        QoLLog.Info(Category.Compressor,
+            $"Compressor equipped ({slot}) - bulk-marking eligible items in inventory");
+        MarkAndRefreshInventory();
     }
 
     private static bool IsOurChip(InventoryItem item)
@@ -52,12 +62,7 @@ public static class Compressor_Inventory_Awake_Patch
         return cfg.CompressorEnabled;
     }
 
-    /// <summary>
-    /// Vyfiltruje jen items, ktere jsou > 1x1 vanilla (kompresovatelne) a soucasne
-    /// jejich aktualni velikost v inventari neodpovida cilove. Tyto items refreshne
-    /// remove + add cyklem, coz prepocita grid layout.
-    /// </summary>
-    private static void RefreshInventoryItemSizes(bool targetCompressed)
+    private static void MarkAndRefreshInventory()
     {
         var inv = Inventory.main;
         if (inv?.container == null) return;
@@ -65,56 +70,108 @@ public static class Compressor_Inventory_Awake_Patch
         try
         {
             var toRefresh = new List<Pickupable>();
+            int newInstances = 0;
 
             foreach (var invItem in inv.container)
             {
                 if (invItem?.item == null) continue;
-                var tt = invItem.item.GetTechType();
+                var pickupable = invItem.item;
+                var tt = pickupable.GetTechType();
 
-                // Blacklisted items nikdy nekompresujeme.
                 if (CompressorBlacklist.IsBlacklisted(tt)) continue;
+                if (invItem.width <= 1 && invItem.height <= 1) continue;
 
-                // Vanilla velikost (z cache). Pokud uz je 1x1, item neni ovlivnen chipem.
-                var vanillaSize = TechData_GetItemSize_Patch.GetVanillaSize(tt);
-                if (vanillaSize.x <= 1 && vanillaSize.y <= 1) continue;
+                var uid = pickupable.GetComponent<UniqueIdentifier>();
+                if (uid == null || string.IsNullOrEmpty(uid.Id)) continue;
 
-                // Zjistit zda soucasna velikost v inventari odpovida cilove.
-                bool currentlyCompressed = (invItem.width <= 1 && invItem.height <= 1);
-                if (targetCompressed && currentlyCompressed) continue; // uz je 1x1
-                if (!targetCompressed && !currentlyCompressed) continue; // uz je vanilla
+                if (CompressorSaveManager.MarkCompressed(uid.Id))
+                    newInstances++;
 
-                toRefresh.Add(invItem.item);
+                toRefresh.Add(pickupable);
             }
 
-            if (toRefresh.Count == 0)
+            if (newInstances > 0)
+                CompressorSaveManager.Save();
+
+            if (toRefresh.Count == 0) return;
+
+            _isRefreshing = true;
+            try
             {
-                QoLLog.Debug(Category.Compressor, "No inventory items need refresh");
-                return;
-            }
+                int removed = 0;
+                foreach (var p in toRefresh)
+                    if (inv.container.RemoveItem(p, forced: true)) removed++;
 
-            // Remove + re-add. AddItem zavola TechData.GetItemSize (nas patch s aktualnim
-            // chip stavem) a vytvori InventoryItem s novou velikosti. Container sam
-            // prelayoutuje grid.
-            int removed = 0;
-            foreach (var p in toRefresh)
+                int readded = 0;
+                foreach (var p in toRefresh)
+                    if (inv.container.AddItem(p) != null) readded++;
+
+                QoLLog.Info(Category.Compressor,
+                    $"Bulk compression: {toRefresh.Count} candidates, {newInstances} new, removed={removed}, re-added={readded}");
+            }
+            finally
             {
-                if (inv.container.RemoveItem(p, forced: true))
-                    removed++;
+                _isRefreshing = false;
             }
-
-            int readded = 0;
-            foreach (var p in toRefresh)
-            {
-                if (inv.container.AddItem(p) != null)
-                    readded++;
-            }
-
-            QoLLog.Info(Category.Compressor,
-                $"Inventory refresh: candidates={toRefresh.Count}, removed={removed}, re-added={readded}");
         }
         catch (Exception ex)
         {
-            QoLLog.Error(Category.Compressor, "RefreshInventoryItemSizes failed", ex);
+            QoLLog.Error(Category.Compressor, "MarkAndRefreshInventory failed", ex);
+            _isRefreshing = false;
+        }
+    }
+
+    // ============================================================
+    // Auto-compression on new pickups (when chip is equipped)
+    // ============================================================
+
+    private static void OnPlayerContainerItemAdded(InventoryItem newItem)
+    {
+        if (_isRefreshing) return;
+        if (newItem?.item == null) return;
+
+        var cfg = InferiusConfig.Instance;
+        if (!cfg.CompressorEnabled) return;
+
+        // Jen kdyz je chip osazen.
+        if (!CompressorItem.IsEquipped()) return;
+
+        var pickupable = newItem.item;
+        var tt = pickupable.GetTechType();
+
+        if (CompressorBlacklist.IsBlacklisted(tt)) return;
+        if (newItem.width <= 1 && newItem.height <= 1) return;
+
+        var uid = pickupable.GetComponent<UniqueIdentifier>();
+        if (uid == null || string.IsNullOrEmpty(uid.Id)) return;
+
+        // Oznacit novou instanci.
+        bool wasNew = CompressorSaveManager.MarkCompressed(uid.Id);
+        if (wasNew)
+            CompressorSaveManager.Save();
+
+        // Refresh jeden item (remove + add) aby InventoryItem constructor
+        // pouzil novou 1x1 velikost.
+        _isRefreshing = true;
+        try
+        {
+            var inv = Inventory.main;
+            if (inv?.container != null)
+            {
+                if (inv.container.RemoveItem(pickupable, forced: true))
+                    inv.container.AddItem(pickupable);
+            }
+
+            QoLLog.Info(Category.Compressor,
+                $"Auto-compressed new pickup: {tt} (uid {uid.Id})");
+        }
+        catch (Exception ex)
+        {
+            QoLLog.Error(Category.Compressor, "Auto-compress failed", ex);
+        }
+        finally
+        {
+            _isRefreshing = false;
         }
     }
 }

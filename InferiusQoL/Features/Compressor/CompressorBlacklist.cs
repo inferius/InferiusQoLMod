@@ -32,7 +32,7 @@ public static class CompressorBlacklist
             return;
         }
 
-        var filePath = Path.Combine(dllDir!, "LanguageFiles", "CompressorBlacklist.json");
+        var filePath = Path.Combine(dllDir!, "Data", "CompressorBlacklist.json");
         if (!File.Exists(filePath))
         {
             QoLLog.Warning(Category.Compressor, $"Blacklist file not found: {filePath}");
