@@ -22,5 +22,8 @@
   "InferiusQoL.Console.NotImplemented": "Funkce není zatím implementována: {0}",
 
   "InferiusQoL.On": "ZAP",
-  "InferiusQoL.Off": "vyp"
+  "InferiusQoL.Off": "vyp",
+
+  "InferiusSeamothTurbo": "Seamoth Turbo Modul",
+  "Tooltip_InferiusSeamothTurbo": "Zvyšuje rychlost Seamothu při sprintu za cenu vyšší spotřeby energie. Konfigurovatelné v nastavení modu."
 }

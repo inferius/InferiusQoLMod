@@ -7,6 +7,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using InferiusQoL.Config;
 using InferiusQoL.Console;
+using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Localization;
 using InferiusQoL.Logging;
 
@@ -48,8 +49,9 @@ public class Plugin : BaseUnityPlugin
         ConsoleCommands.Register();
         QoLLog.Info(Category.Core, "Console commands registered");
 
-        // Feature patchers napojime postupne. Zatim jen scaffolding.
-        // Harmony.PatchAll(typeof(...));
+        // Registrace custom TechTypes (musi byt v Awake, drive nez hra vytvori craft tree).
+        if (cfg.SeamothTurboEnabled)
+            SeamothTurboItem.Register();
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");
     }

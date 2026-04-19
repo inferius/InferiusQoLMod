@@ -22,5 +22,8 @@
   "InferiusQoL.Console.NotImplemented": "Feature not yet implemented: {0}",
 
   "InferiusQoL.On": "ON",
-  "InferiusQoL.Off": "off"
+  "InferiusQoL.Off": "off",
+
+  "InferiusSeamothTurbo": "Seamoth Turbo Module",
+  "Tooltip_InferiusSeamothTurbo": "Boosts Seamoth speed while sprinting at the cost of increased energy consumption. Configurable in mod options."
 }
