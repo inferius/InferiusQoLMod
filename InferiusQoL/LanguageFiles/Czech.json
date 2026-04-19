@@ -4,6 +4,59 @@
   "InferiusQoL.Tab.SeamothTurboUpgrades": "Turbo moduly Seamoth",
   "InferiusQoL.Tab.BackpackUpgrades": "Vylepšení batohů",
 
+  "Debug verbosity": "Úroveň debug výpisu",
+  "Enlarge player inventory": "Zvětšit inventář hráče",
+  "  Extra rows": "  Řádky navíc",
+  "  Extra columns": "  Sloupce navíc",
+
+  "Bigger locker capacity": "Větší kapacita skříní",
+  "  Locker width (cols)": "  Šířka skříně (sloupce)",
+  "  Locker height (rows)": "  Výška skříně (řádky)",
+  "  Wall locker width": "  Šířka nástěnné skříně",
+  "  Wall locker height": "  Výška nástěnné skříně",
+
+  "Enable backpacks": "Povolit batohy",
+  "  Small backpack extra rows": "  Řádky navíc (Malý batoh)",
+  "  Medium backpack extra rows": "  Řádky navíc (Střední batoh)",
+  "  Large backpack extra rows": "  Řádky navíc (Velký batoh)",
+
+  "Enable Seamoth Turbo modules": "Povolit Seamoth Turbo moduly",
+  "  MK1 speed (%)": "  MK1 rychlost (%)",
+  "  MK1 energy drain (%)": "  MK1 spotřeba (%)",
+  "  MK2 speed (%)": "  MK2 rychlost (%)",
+  "  MK2 energy drain (%)": "  MK2 spotřeba (%)",
+  "  MK3 speed (%)": "  MK3 rychlost (%)",
+  "  MK3 energy drain (%)": "  MK3 spotřeba (%)",
+  "  Surface falloff distance (m)": "  Útlum u hladiny (m)",
+
+  "Enable Retriever terminal": "Povolit Retriever terminál",
+  "  Cost per retrieval (J)": "  Cena za vyzvednutí (J)",
+  "  Min base power (%)": "  Min. energie základny (%)",
+
+  "Enable Compressor (item press)": "Povolit Lis (komprese itemů)",
+  "  Requires energy to compress": "  Vyžadovat energii ke kompresi",
+  "  Energy per compression (J)": "  Energie na kompresi (J)",
+
+  "Enable Tank Welder": "Povolit Spojování lahví",
+  "  Tier 1 multiplier (%)": "  Tier 1 násobitel (%)",
+  "  Tier 2 multiplier (%)": "  Tier 2 násobitel (%)",
+  "  Tier 3 multiplier (%)": "  Tier 3 násobitel (%)",
+
+  "Enable battery rework": "Povolit rework baterií",
+  "  Vanilla Battery capacity": "  Kapacita vanilla Baterie",
+  "  Vanilla Power Cell capacity": "  Kapacita vanilla Power Cell",
+  "  Reinforced Battery capacity": "  Kapacita Reinforced Baterie",
+  "  Reinforced Power Cell capacity": "  Kapacita Reinforced Power Cell",
+  "  Hyper Battery capacity": "  Kapacita Hyper Baterie",
+  "  Hyper Power Cell capacity": "  Kapacita Hyper Power Cell",
+  "  Migrate old saves (clamp charge)": "  Migrovat staré save (ořezat nabití)",
+
+  "Enable Teleport Beacon": "Povolit Teleport Beacon",
+  "  Source base cost (J)": "  Cena na zdrojové základně (J)",
+  "  Target base cost (J)": "  Cena na cílové základně (J)",
+  "  Min power on both bases (%)": "  Min. energie obou základen (%)",
+  "  Cooldown (s)": "  Cooldown (s)",
+
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Úroveň logování: {0}",
