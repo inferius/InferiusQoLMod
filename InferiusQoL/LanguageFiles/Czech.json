@@ -24,6 +24,12 @@
   "InferiusQoL.On": "ZAP",
   "InferiusQoL.Off": "vyp",
 
-  "InferiusSeamothTurbo": "Seamoth Turbo Modul",
-  "Tooltip_InferiusSeamothTurbo": "Zvyšuje rychlost Seamothu při sprintu za cenu vyšší spotřeby energie. Konfigurovatelné v nastavení modu."
+  "InferiusSeamothTurboMK1": "Seamoth Turbo Modul MK1",
+  "Tooltip_InferiusSeamothTurboMK1": "Základní zrychlení při sprintu. Aktivuje se podržením klávesy Sprint. Vypnuto nad hladinou. Mid-game tier.",
+
+  "InferiusSeamothTurboMK2": "Seamoth Turbo Modul MK2",
+  "Tooltip_InferiusSeamothTurboMK2": "Vylepšené turbo s vyšším rychlostním stropem a spotřebou. Craft spotřebuje MK1 modul. Late mid-game tier.",
+
+  "InferiusSeamothTurboMK3": "Seamoth Turbo Modul MK3",
+  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo s nejvyšším zrychlením a spotřebou. Craft spotřebuje MK2 modul."
 }

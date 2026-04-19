@@ -73,20 +73,37 @@ public class InferiusConfig : ConfigFile
     // Seamoth turbo
     // =====================================================================
 
-    [Toggle("Enable Seamoth Turbo module", Order = 400)]
+    [Toggle("Enable Seamoth Turbo modules", Order = 400)]
     public bool SeamothTurboEnabled = true;
 
-    // Internally stored as integer percentage to avoid a Nautilus bug that serializes
-    // float slider fields as quoted strings, which corrupts the menu on reload.
-    // 100 = 1.00x, 200 = 2.00x, ...
-    [Slider("  Speed multiplier (%)", 100, 500, DefaultValue = 200, Step = 10, Order = 401)]
-    public int SeamothTurboSpeedPercent = 200;
+    // Integer percentage to avoid Nautilus float serialization bug. 100 = 1.00x.
+    [Slider("  MK1 speed (%)", 100, 500, DefaultValue = 200, Step = 10, Order = 401)]
+    public int SeamothTurboMK1SpeedPercent = 200;
 
-    [Slider("  Energy drain multiplier (%)", 100, 1000, DefaultValue = 300, Step = 25, Order = 402)]
-    public int SeamothTurboEnergyPercent = 300;
+    [Slider("  MK1 energy drain (%)", 100, 1000, DefaultValue = 300, Step = 25, Order = 402)]
+    public int SeamothTurboMK1EnergyPercent = 300;
 
-    [JsonIgnore] public float SeamothTurboSpeedMultiplier => SeamothTurboSpeedPercent / 100f;
-    [JsonIgnore] public float SeamothTurboEnergyMultiplier => SeamothTurboEnergyPercent / 100f;
+    [Slider("  MK2 speed (%)", 100, 600, DefaultValue = 330, Step = 10, Order = 403)]
+    public int SeamothTurboMK2SpeedPercent = 330;
+
+    [Slider("  MK2 energy drain (%)", 100, 1500, DefaultValue = 600, Step = 25, Order = 404)]
+    public int SeamothTurboMK2EnergyPercent = 600;
+
+    [Slider("  MK3 speed (%)", 100, 700, DefaultValue = 430, Step = 10, Order = 405)]
+    public int SeamothTurboMK3SpeedPercent = 430;
+
+    [Slider("  MK3 energy drain (%)", 100, 2500, DefaultValue = 1200, Step = 50, Order = 406)]
+    public int SeamothTurboMK3EnergyPercent = 1200;
+
+    [Slider("  Surface falloff distance (m)", 0, 60, DefaultValue = 30, Step = 1, Order = 407)]
+    public int SeamothTurboSurfaceFalloffMeters = 30;
+
+    [JsonIgnore] public float SeamothTurboMK1SpeedMultiplier => SeamothTurboMK1SpeedPercent / 100f;
+    [JsonIgnore] public float SeamothTurboMK1EnergyMultiplier => SeamothTurboMK1EnergyPercent / 100f;
+    [JsonIgnore] public float SeamothTurboMK2SpeedMultiplier => SeamothTurboMK2SpeedPercent / 100f;
+    [JsonIgnore] public float SeamothTurboMK2EnergyMultiplier => SeamothTurboMK2EnergyPercent / 100f;
+    [JsonIgnore] public float SeamothTurboMK3SpeedMultiplier => SeamothTurboMK3SpeedPercent / 100f;
+    [JsonIgnore] public float SeamothTurboMK3EnergyMultiplier => SeamothTurboMK3EnergyPercent / 100f;
 
     // =====================================================================
     // Retriever

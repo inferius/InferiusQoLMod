@@ -51,7 +51,7 @@ public class Plugin : BaseUnityPlugin
 
         // Registrace custom TechTypes (musi byt v Awake, drive nez hra vytvori craft tree).
         if (cfg.SeamothTurboEnabled)
-            SeamothTurboItem.Register();
+            SeamothTurboItems.Register();
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");
     }

@@ -24,6 +24,12 @@
   "InferiusQoL.On": "ON",
   "InferiusQoL.Off": "off",
 
-  "InferiusSeamothTurbo": "Seamoth Turbo Module",
-  "Tooltip_InferiusSeamothTurbo": "Boosts Seamoth speed while sprinting at the cost of increased energy consumption. Configurable in mod options."
+  "InferiusSeamothTurboMK1": "Seamoth Turbo Module MK1",
+  "Tooltip_InferiusSeamothTurboMK1": "Basic speed boost while sprinting. Holds the Sprint key to activate. Deactivates above the surface. Mid-game tier.",
+
+  "InferiusSeamothTurboMK2": "Seamoth Turbo Module MK2",
+  "Tooltip_InferiusSeamothTurboMK2": "Improved turbo with a higher speed cap and drain. Consumes a MK1 module during crafting. Late mid-game tier.",
+
+  "InferiusSeamothTurboMK3": "Seamoth Turbo Module MK3",
+  "Tooltip_InferiusSeamothTurboMK3": "Endgame turbo with the highest boost and heaviest drain. Consumes a MK2 module during crafting."
 }

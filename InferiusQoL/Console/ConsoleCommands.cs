@@ -35,7 +35,7 @@ public static class ConsoleCommands
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.InventoryResize"),-18} {OnOff(c.InventoryResizeEnabled)} (+{c.InventoryExtraRows}R/+{c.InventoryExtraCols}C)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.LockerResize"),-18} {OnOff(c.LockerResizeEnabled)} ({c.LockerWidth}x{c.LockerHeight}, wall {c.WallLockerWidth}x{c.WallLockerHeight})");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.Backpacks"),-18} {OnOff(c.BackpacksEnabled)} (S/M/L = {c.BackpackSmallCapacity}/{c.BackpackMediumCapacity}/{c.BackpackLargeCapacity})");
-        sb.AppendLine($"  {L.Get("InferiusQoL.Status.SeamothTurbo"),-18} {OnOff(c.SeamothTurboEnabled)} ({c.SeamothTurboSpeedMultiplier:0.0}x spd, {c.SeamothTurboEnergyMultiplier:0.00}x drain)");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.SeamothTurbo"),-18} {OnOff(c.SeamothTurboEnabled)} (MK1 {c.SeamothTurboMK1SpeedMultiplier:0.0}x/{c.SeamothTurboMK1EnergyMultiplier:0.0}x, MK2 {c.SeamothTurboMK2SpeedMultiplier:0.0}x/{c.SeamothTurboMK2EnergyMultiplier:0.0}x, MK3 {c.SeamothTurboMK3SpeedMultiplier:0.0}x/{c.SeamothTurboMK3EnergyMultiplier:0.0}x)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.Retriever"),-18} {OnOff(c.RetrieverEnabled)} ({c.RetrieverActionCostJoules} J/item, min {c.RetrieverMinBasePowerPercent}% power)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.Compressor"),-18} {OnOff(c.CompressorEnabled)} (energy: {(c.CompressorRequiresEnergy ? c.CompressorEnergyCost + " J" : "off")})");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.TankWelder"),-18} {OnOff(c.TankWelderEnabled)} (T1 {c.TankWelderT1Multiplier:0.0}x / T2 {c.TankWelderT2Multiplier:0.0}x / T3 {c.TankWelderT3Multiplier:0.0}x)");
