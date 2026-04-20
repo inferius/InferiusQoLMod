@@ -91,7 +91,9 @@ public class Plugin : BaseUnityPlugin
 
         if (cfg.TeleportBeaconEnabled)
         {
+            TeleportBeaconSaveManager.Load();
             TeleportBeaconItem.Register();
+            TeleportEfficiencyChips.Register();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

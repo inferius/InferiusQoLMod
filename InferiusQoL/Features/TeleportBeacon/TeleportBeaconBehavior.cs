@@ -6,23 +6,29 @@ using InferiusQoL.Logging;
 using UnityEngine;
 
 /// <summary>
-/// MonoBehaviour pripojeny na kazdy spawnly Teleport Beacon prefab. Implementuje
-/// IHandTarget pro interakci s hracem (hover tooltip + click teleport).
+/// MonoBehaviour na kazdem spawnlem Teleport Beacon. Pri interakci otevre IMGUI
+/// UI (TeleportBeaconUI) se seznamem destinaci a input pro pojmenovani.
 ///
-/// Registry vsech aktivnich instanci (All) slouzi k vyhledani cilu pri teleportu.
-/// Nejblizsi jiny beacon = cil. Energy check a drain na obou basech, cooldown
-/// per beacon.
+/// Per-beacon data (jmeno, efficiency tier) persistuji v TeleportBeaconSaveManager
+/// (JSON vedle DLL, key = UniqueIdentifier.Id).
 /// </summary>
 public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
 {
     public static readonly List<TeleportBeaconBehavior> All = new List<TeleportBeaconBehavior>();
 
-    private float _cooldownUntil = 0f;
+    public float cooldownUntil = 0f;
+
+    private TeleportBeaconUI? _ui;
+
+    public string Id => GetComponent<UniqueIdentifier>()?.Id ?? "";
+
+    public TeleportBeaconSaveManager.BeaconData Data =>
+        TeleportBeaconSaveManager.GetOrCreate(Id);
 
     private void OnEnable()
     {
         if (!All.Contains(this)) All.Add(this);
-        QoLLog.Debug(Category.Teleport, $"Beacon registered. Total active: {All.Count}");
+        if (_ui == null) _ui = gameObject.AddComponent<TeleportBeaconUI>();
     }
 
     private void OnDisable()
@@ -40,52 +46,84 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
 
     public void OnHandClick(GUIHand hand)
     {
+        if (!InferiusConfig.Instance.TeleportBeaconEnabled) return;
+        _ui?.Show();
+    }
+
+    public string GetHoverText()
+    {
+        var name = Data.name;
+        return All.Count > 1 ? $"Open {name}" : $"{name} (no other beacons)";
+    }
+
+    public bool IsOnCooldown(out int secondsRemaining)
+    {
+        if (Time.time < cooldownUntil)
+        {
+            secondsRemaining = (int)(cooldownUntil - Time.time);
+            return true;
+        }
+        secondsRemaining = 0;
+        return false;
+    }
+
+    public bool TryTeleportTo(TeleportBeaconBehavior target, out string failReason)
+    {
+        failReason = "";
         var cfg = InferiusConfig.Instance;
-        if (!cfg.TeleportBeaconEnabled) return;
 
-        if (Time.time < _cooldownUntil)
+        if (IsOnCooldown(out int cd))
         {
-            var remaining = (int)(_cooldownUntil - Time.time);
-            ErrorMessage.AddMessage($"Teleport on cooldown: {remaining}s");
-            return;
+            failReason = $"Cooldown {cd}s";
+            return false;
         }
 
-        var target = FindClosestOtherBeacon();
-        if (target == null)
+        var thisRelay = GetComponentInParent<PowerRelay>();
+        var targetRelay = target.GetComponentInParent<PowerRelay>();
+
+        if (!HasEnoughPower(thisRelay, cfg.TeleportMinBasePowerPercent))
         {
-            ErrorMessage.AddMessage("No other teleport beacons found");
-            return;
+            failReason = "Source base power too low";
+            return false;
+        }
+        if (!HasEnoughPower(targetRelay, cfg.TeleportMinBasePowerPercent))
+        {
+            failReason = "Target base power too low";
+            return false;
         }
 
-        // Check power
-        var thisBase = GetPowerRelay(this);
-        var targetBase = GetPowerRelay(target);
-        if (!HasEnoughPower(thisBase, cfg.TeleportMinBasePowerPercent))
-        {
-            ErrorMessage.AddMessage("Source base power too low");
-            return;
-        }
-        if (!HasEnoughPower(targetBase, cfg.TeleportMinBasePowerPercent))
-        {
-            ErrorMessage.AddMessage("Target base power too low");
-            return;
-        }
-
-        // Energy cost = base cost + distance-based cost.
         var distance = Vector3.Distance(transform.position, target.transform.position);
         var distanceCost = (distance / 100f) * cfg.TeleportCostPerHundredMeters;
-        var totalSourceCost = cfg.TeleportSourceCostJoules + (distanceCost * 0.5f);
-        var totalTargetCost = cfg.TeleportTargetCostJoules + (distanceCost * 0.5f);
+        var baseCost = cfg.TeleportSourceCostJoules + cfg.TeleportTargetCostJoules + distanceCost;
 
-        DrainPower(thisBase, totalSourceCost);
-        DrainPower(targetBase, totalTargetCost);
+        // Aplikuj efficiency chip multiplikator (nejvyssi z obou beacons).
+        var maxTier = System.Math.Max(Data.efficiencyTier, target.Data.efficiencyTier);
+        var efficiencyMult = cfg.GetEfficiencyMultiplier(maxTier);
+        baseCost *= efficiencyMult;
 
-        // Teleport player pres Subnautica standard API.
-        var destination = target.transform.position + Vector3.up * 1.5f;
+        var totalSourceCost = baseCost * 0.5f;
+        var totalTargetCost = baseCost * 0.5f;
+
+        DrainPower(thisRelay, totalSourceCost);
+        DrainPower(targetRelay, totalTargetCost);
+
+        // Teleport destination = kousek pred target beacon (forward), aby hrac
+        // dopadl na konzistentni misto vedle beaconu a ne do/na nej.
+        var targetT = target.transform;
+        var destination = targetT.position + targetT.forward * 2f + Vector3.up * 1f;
+
         var player = Player.main;
         if (player != null)
         {
             player.SetPosition(destination);
+
+            // Look back toward the beacon
+            player.transform.rotation = Quaternion.LookRotation(-targetT.forward);
+
+            // Detekce target sub - aby Subnautica nevedela hrac je v swim mode.
+            var targetSub = FindSubAt(destination) ?? target.GetComponentInParent<SubRoot>();
+            player.currentSub = targetSub;
+
             if (player.rigidBody != null)
             {
                 player.rigidBody.velocity = Vector3.zero;
@@ -93,66 +131,48 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
             }
         }
 
-        _cooldownUntil = Time.time + cfg.TeleportCooldownSeconds;
-        target._cooldownUntil = Time.time + cfg.TeleportCooldownSeconds; // target tez cooldown
+        cooldownUntil = Time.time + cfg.TeleportCooldownSeconds;
+        target.cooldownUntil = Time.time + cfg.TeleportCooldownSeconds;
 
         QoLLog.Info(Category.Teleport,
-            $"Teleported {distance:0}m to beacon at {target.transform.position}, drained {totalSourceCost:0}+{totalTargetCost:0} J");
+            $"Teleport '{Data.name}' -> '{target.Data.name}' ({distance:0}m, {totalSourceCost + totalTargetCost:0} J total)");
+        return true;
     }
 
-    private string GetHoverText()
+    public float EstimateCost(TeleportBeaconBehavior target)
     {
-        var target = FindClosestOtherBeacon();
-        if (target == null)
-            return "Teleport Beacon (no other beacons)";
-
-        var dist = Vector3.Distance(transform.position, target.transform.position);
-        if (Time.time < _cooldownUntil)
-        {
-            var remaining = (int)(_cooldownUntil - Time.time);
-            return $"Teleport Beacon (cooldown: {remaining}s)";
-        }
         var cfg = InferiusConfig.Instance;
-        var distanceCost = (dist / 100f) * cfg.TeleportCostPerHundredMeters;
-        var totalCost = cfg.TeleportSourceCostJoules + cfg.TeleportTargetCostJoules + distanceCost;
-        return $"Teleport to nearest beacon ({dist:0}m, ~{totalCost:0} J)";
+        var distance = Vector3.Distance(transform.position, target.transform.position);
+        var distanceCost = (distance / 100f) * cfg.TeleportCostPerHundredMeters;
+        var base_ = cfg.TeleportSourceCostJoules + cfg.TeleportTargetCostJoules + distanceCost;
+
+        var maxTier = System.Math.Max(Data.efficiencyTier, target.Data.efficiencyTier);
+        return base_ * cfg.GetEfficiencyMultiplier(maxTier);
     }
 
-    private TeleportBeaconBehavior? FindClosestOtherBeacon()
+    private static SubRoot? FindSubAt(Vector3 position)
     {
-        float minDist = float.MaxValue;
-        TeleportBeaconBehavior? closest = null;
-        foreach (var b in All)
+        var colliders = Physics.OverlapSphere(position, 2f);
+        foreach (var c in colliders)
         {
-            if (b == null || b == this) continue;
-            var dist = Vector3.Distance(transform.position, b.transform.position);
-            if (dist < minDist)
-            {
-                minDist = dist;
-                closest = b;
-            }
+            if (c == null) continue;
+            var sub = c.GetComponentInParent<SubRoot>();
+            if (sub != null) return sub;
         }
-        return closest;
+        return null;
     }
 
-    private static PowerRelay? GetPowerRelay(TeleportBeaconBehavior beacon)
+    public static bool HasEnoughPower(PowerRelay? relay, float minPercent)
     {
-        if (beacon == null) return null;
-        return beacon.GetComponentInParent<PowerRelay>();
-    }
-
-    private static bool HasEnoughPower(PowerRelay? relay, float minPercent)
-    {
-        if (relay == null) return true; // mimo base nebo bez relay = bez kontroly
+        if (relay == null) return true;
         if (relay.GetMaxPower() <= 0f) return false;
         var ratio = relay.GetPower() / relay.GetMaxPower() * 100f;
         return ratio >= minPercent;
     }
 
-    private static void DrainPower(PowerRelay? relay, float amount)
+    public static void DrainPower(PowerRelay? relay, float amount)
     {
-        if (relay == null) return;
-        if (amount <= 0f) return;
+        if (relay == null || amount <= 0f) return;
         relay.ConsumeEnergy(amount, out _);
     }
 }

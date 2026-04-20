@@ -206,6 +206,23 @@ public class InferiusConfig : ConfigFile
     [Slider("  Energy cost per 100m (J)", 0, 500, DefaultValue = 20, Step = 5, Order = 905)]
     public int TeleportCostPerHundredMeters = 20;
 
+    [Slider("  Efficiency chip MK1 cost (%)", 10, 100, DefaultValue = 75, Step = 5, Order = 906)]
+    public int TeleportEfficiencyMK1Percent = 75;
+
+    [Slider("  Efficiency chip MK2 cost (%)", 10, 100, DefaultValue = 50, Step = 5, Order = 907)]
+    public int TeleportEfficiencyMK2Percent = 50;
+
+    [Slider("  Efficiency chip MK3 cost (%)", 5, 100, DefaultValue = 25, Step = 5, Order = 908)]
+    public int TeleportEfficiencyMK3Percent = 25;
+
+    public float GetEfficiencyMultiplier(int tier) => tier switch
+    {
+        1 => TeleportEfficiencyMK1Percent / 100f,
+        2 => TeleportEfficiencyMK2Percent / 100f,
+        3 => TeleportEfficiencyMK3Percent / 100f,
+        _ => 1f,
+    };
+
     // =====================================================================
     // Singleton
     // =====================================================================
