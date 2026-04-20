@@ -122,5 +122,8 @@
   "Tooltip_InferiusHyperPowerCell": "Endgame Power Cell s nejvyšší kapacitou. Spotřebuje 2 Hyper baterie.",
 
   "InferiusCompressor": "Lis inventáře",
-  "Tooltip_InferiusCompressor": "Pokročilý chip, který zmenšuje položky v inventáři na 1x1 (kromě baterií, lahví, ryb a vajíček). Osaď do Chip slotu. Komprese zůstává i po odsazení chipu."
+  "Tooltip_InferiusCompressor": "Pokročilý chip, který zmenšuje položky v inventáři na 1x1 (kromě baterií, lahví, ryb a vajíček). Osaď do Chip slotu. Komprese zůstává i po odsazení chipu.",
+
+  "InferiusTeleportBeacon": "Teleportační maják",
+  "Tooltip_InferiusTeleportBeacon": "Stacionární teleportační zařízení. Postav 2+ v různých základnách pro teleport mezi nimi. Energetická cena: 500 J na stranu, cooldown 30s, obě základny musí mít min. 40% energie."
 }

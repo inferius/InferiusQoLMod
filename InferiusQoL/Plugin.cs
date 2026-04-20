@@ -12,6 +12,7 @@ using InferiusQoL.Features.Batteries;
 using InferiusQoL.Features.Compressor;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Features.TankWelder;
+using InferiusQoL.Features.TeleportBeacon;
 using InferiusQoL.Localization;
 using InferiusQoL.Logging;
 
@@ -86,6 +87,11 @@ public class Plugin : BaseUnityPlugin
             CompressorSaveManager.Load();
             CompressorItem.RegisterTabs();
             CompressorItem.Register();
+        }
+
+        if (cfg.TeleportBeaconEnabled)
+        {
+            TeleportBeaconItem.Register();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

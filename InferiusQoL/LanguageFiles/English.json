@@ -114,5 +114,8 @@
   "Tooltip_InferiusHyperPowerCell": "Endgame power cell with the highest capacity. Consumes 2 Hyper Batteries.",
 
   "InferiusCompressor": "Inventory Compressor",
-  "Tooltip_InferiusCompressor": "Advanced chip that compresses inventory items to 1x1 (except batteries, tanks, fish and eggs). Equip in a Chip slot. Compression persists after unequip."
+  "Tooltip_InferiusCompressor": "Advanced chip that compresses inventory items to 1x1 (except batteries, tanks, fish and eggs). Equip in a Chip slot. Compression persists after unequip.",
+
+  "InferiusTeleportBeacon": "Teleport Beacon",
+  "Tooltip_InferiusTeleportBeacon": "Stationary teleport device. Place 2+ across different bases to teleport between them. Energy cost: 500 J per side, 30s cooldown, both bases need 40%+ power."
 }

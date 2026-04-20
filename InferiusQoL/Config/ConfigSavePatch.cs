@@ -2,6 +2,7 @@ namespace InferiusQoL.Config;
 
 using HarmonyLib;
 using InferiusQoL.Features.InventoryResize;
+using InferiusQoL.Features.LockerResize;
 using InferiusQoL.Logging;
 using Nautilus.Json;
 
@@ -32,9 +33,7 @@ public static class ConfigSavePatch
         try
         {
             InventoryResizePatch.ApplyRuntime(cfg);
-            // Dalsi runtime-apply featury pridej sem:
-            // LockerResizePatch.ApplyRuntime(cfg);
-            // SeamothTurbo.ApplyRuntime(cfg);
+            StorageContainer_Awake_Patch.ApplyRuntime();
         }
         catch (System.Exception ex)
         {

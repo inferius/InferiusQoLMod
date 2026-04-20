@@ -191,17 +191,20 @@ public class InferiusConfig : ConfigFile
     [Toggle("Enable Teleport Beacon", Order = 900)]
     public bool TeleportBeaconEnabled = true;
 
-    [Slider("  Source base cost (J)", 0, 5000, DefaultValue = 500, Step = 50, Order = 901)]
-    public int TeleportSourceCostJoules = 500;
+    [Slider("  Source base cost (J)", 0, 5000, DefaultValue = 100, Step = 25, Order = 901)]
+    public int TeleportSourceCostJoules = 100;
 
-    [Slider("  Target base cost (J)", 0, 5000, DefaultValue = 500, Step = 50, Order = 902)]
-    public int TeleportTargetCostJoules = 500;
+    [Slider("  Target base cost (J)", 0, 5000, DefaultValue = 100, Step = 25, Order = 902)]
+    public int TeleportTargetCostJoules = 100;
 
-    [Slider("  Min power on both bases (%)", 0, 100, DefaultValue = 40, Step = 5, Order = 903)]
-    public int TeleportMinBasePowerPercent = 40;
+    [Slider("  Min power on both bases (%)", 0, 100, DefaultValue = 20, Step = 5, Order = 903)]
+    public int TeleportMinBasePowerPercent = 20;
 
-    [Slider("  Cooldown (s)", 0, 300, DefaultValue = 30, Step = 5, Order = 904)]
-    public int TeleportCooldownSeconds = 30;
+    [Slider("  Cooldown (s)", 0, 300, DefaultValue = 15, Step = 5, Order = 904)]
+    public int TeleportCooldownSeconds = 15;
+
+    [Slider("  Energy cost per 100m (J)", 0, 500, DefaultValue = 20, Step = 5, Order = 905)]
+    public int TeleportCostPerHundredMeters = 20;
 
     // =====================================================================
     // Singleton
