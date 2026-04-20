@@ -117,5 +117,12 @@
   "Tooltip_InferiusCompressor": "Advanced chip that compresses inventory items to 1x1 (except batteries, tanks, fish and eggs). Equip in a Chip slot. Compression persists after unequip.",
 
   "InferiusTeleportBeacon": "Teleport Beacon",
-  "Tooltip_InferiusTeleportBeacon": "Stationary teleport device. Place 2+ across different bases to teleport between them. Energy cost: 500 J per side, 30s cooldown, both bases need 40%+ power."
+  "Tooltip_InferiusTeleportBeacon": "Buildable teleport device. Place 2+ across different bases to teleport between them. Click to open UI - name the beacon, pick destination, install efficiency chips. Energy cost scales with distance.",
+
+  "InferiusTeleportEfficiencyMK1": "Teleport Efficiency Chip MK1",
+  "Tooltip_InferiusTeleportEfficiencyMK1": "Install in a Teleport Beacon to reduce energy cost (default 75% of base cost). Craft in Modification Station.",
+  "InferiusTeleportEfficiencyMK2": "Teleport Efficiency Chip MK2",
+  "Tooltip_InferiusTeleportEfficiencyMK2": "Better efficiency chip (default 50% of base cost). Crafting consumes a MK1 chip.",
+  "InferiusTeleportEfficiencyMK3": "Teleport Efficiency Chip MK3",
+  "Tooltip_InferiusTeleportEfficiencyMK3": "Maximum efficiency chip (default 25% of base cost). Crafting consumes a MK2 chip."
 }

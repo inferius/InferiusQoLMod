@@ -7,6 +7,7 @@ using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
 using Nautilus.Assets.PrefabTemplates;
 using Nautilus.Crafting;
+using Nautilus.Handlers;
 using UnityEngine;
 
 public enum MergedTankTier
@@ -128,6 +129,10 @@ public static class TankWelderItems
                 }
             });
 
+        // T1 odemceny od startu (recept stejne vyzaduje 2x PlasteelTank takze progres je gated
+        // materialy, ne unlock gates).
+        KnownTechHandler.UnlockOnStart(MergedTankT1);
+
         QoLLog.Info(Category.TankWelder,
             $"Registered Merged Tanks: T1={MergedTankT1}, T2={MergedTankT2}, T3={MergedTankT3}, T4={MergedTankT4}");
     }
@@ -142,7 +147,21 @@ public static class TankWelderItems
         RecipeData recipe)
     {
         var info = PrefabInfo.WithTechType(classId, displayName, description);
-        info.WithIcon(SpriteManager.Get(TechType.PlasteelTank));
+        var iconFile = classId switch
+        {
+            "InferiusMergedTankT1" => "TankMK1.png",
+            "InferiusMergedTankT2" => "TankMK2.png",
+            "InferiusMergedTankT3" => "TankMK3.png",
+            "InferiusMergedTankT4" => "TankMK4.png",
+            _ => null,
+        };
+        info.WithIcon(iconFile != null
+            ? InferiusQoL.Assets.IconLoader.LoadOrFallback(iconFile, TechType.PlasteelTank)
+            : SpriteManager.Get(TechType.PlasteelTank));
+
+        // Explicitni velikost v inventari (vanilla PlasteelTank = 3x3). Bez tohoto
+        // Nautilus defaultuje na 1x1 pro custom TechType.
+        info.WithSizeInInventory(new Vector2int(3, 3));
 
         var prefab = new CustomPrefab(info);
 

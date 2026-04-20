@@ -91,6 +91,15 @@ public static class CompressorSaveManager
         return _compressedIds.Add(id);
     }
 
+    /// <summary>Odstrani marker (napr. kdyz TT je nove v blacklistu). Vraci true pokud byl odstranen.</summary>
+    public static bool Remove(string id)
+    {
+        if (string.IsNullOrEmpty(id)) return false;
+        var removed = _compressedIds.Remove(id);
+        if (removed) Save();
+        return removed;
+    }
+
     private static string? GetSavePath()
     {
         var dllDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

@@ -119,7 +119,16 @@ public static class SeamothTurboItems
         string fabricatorTab)
     {
         var info = PrefabInfo.WithTechType(classId, displayName, description);
-        info.WithIcon(SpriteManager.Get(iconReference));
+        var iconFile = classId switch
+        {
+            "InferiusSeamothTurboMK1" => "Turbo.png",
+            "InferiusSeamothTurboMK2" => "TurboMK2.png",
+            "InferiusSeamothTurboMK3" => "TurboMK3.png",
+            _ => null,
+        };
+        info.WithIcon(iconFile != null
+            ? InferiusQoL.Assets.IconLoader.LoadOrFallback(iconFile, iconReference)
+            : SpriteManager.Get(iconReference));
 
         var prefab = new CustomPrefab(info);
         prefab.SetGameObject(new CloneTemplate(info, TechType.SeamothSolarCharge));

@@ -122,7 +122,16 @@ public static class BackpackItems
         string[] tabPath)
     {
         var info = PrefabInfo.WithTechType(classId, displayName, description);
-        info.WithIcon(SpriteManager.Get(iconReference));
+        // Small backpack zamerne pouziva vanilla LuggageBag sprite (bez custom PNG).
+        var iconFile = classId switch
+        {
+            "InferiusBackpackMedium" => "BagMK2.png",
+            "InferiusBackpackLarge" => "BagMK3.png",
+            _ => null,
+        };
+        info.WithIcon(iconFile != null
+            ? InferiusQoL.Assets.IconLoader.LoadOrFallback(iconFile, iconReference)
+            : SpriteManager.Get(iconReference));
         info.WithSizeInInventory(new Vector2int(1, 1));
 
         var prefab = new CustomPrefab(info);

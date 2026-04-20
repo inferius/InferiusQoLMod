@@ -125,5 +125,12 @@
   "Tooltip_InferiusCompressor": "Pokročilý chip, který zmenšuje položky v inventáři na 1x1 (kromě baterií, lahví, ryb a vajíček). Osaď do Chip slotu. Komprese zůstává i po odsazení chipu.",
 
   "InferiusTeleportBeacon": "Teleportační maják",
-  "Tooltip_InferiusTeleportBeacon": "Stacionární teleportační zařízení. Postav 2+ v různých základnách pro teleport mezi nimi. Energetická cena: 500 J na stranu, cooldown 30s, obě základny musí mít min. 40% energie."
+  "Tooltip_InferiusTeleportBeacon": "Stavitelné teleportační zařízení. Postav 2+ v různých základnách pro teleport mezi nimi. Kliknutím otevřeš UI - pojmenuj maják, vyber cíl, osaď efficiency chipy. Energetická cena závisí na vzdálenosti.",
+
+  "InferiusTeleportEfficiencyMK1": "Teleport Efficiency Chip MK1",
+  "Tooltip_InferiusTeleportEfficiencyMK1": "Osaď do teleportačního majáku pro snížení energetické ceny (default 75% z plné ceny). Craft ve Vylepšovací stanici.",
+  "InferiusTeleportEfficiencyMK2": "Teleport Efficiency Chip MK2",
+  "Tooltip_InferiusTeleportEfficiencyMK2": "Lepší efficiency chip (default 50% z plné ceny). Craft spotřebuje MK1 chip.",
+  "InferiusTeleportEfficiencyMK3": "Teleport Efficiency Chip MK3",
+  "Tooltip_InferiusTeleportEfficiencyMK3": "Maximální efficiency chip (default 25% z plné ceny). Craft spotřebuje MK2 chip."
 }

@@ -155,7 +155,17 @@ public static class BatteryItems
         bool isHyper)
     {
         var info = PrefabInfo.WithTechType(classId, displayName, description);
-        info.WithIcon(SpriteManager.Get(cloneFrom));
+        var iconFile = classId switch
+        {
+            "InferiusReinforcedBattery" => "ReBattery.png",
+            "InferiusReinforcedPowerCell" => "RePower_Cell.png",
+            "InferiusHyperBattery" => "Hyper_Battery.png",
+            "InferiusHyperPowerCell" => "Hyper_Power_Cell.png",
+            _ => null,
+        };
+        info.WithIcon(iconFile != null
+            ? InferiusQoL.Assets.IconLoader.LoadOrFallback(iconFile, cloneFrom)
+            : SpriteManager.Get(cloneFrom));
 
         var prefab = new CustomPrefab(info);
 

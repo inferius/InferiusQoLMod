@@ -82,7 +82,16 @@ public static class TeleportEfficiencyChips
         RecipeData recipe)
     {
         var info = PrefabInfo.WithTechType(classId, displayName, description);
-        info.WithIcon(SpriteManager.Get(TechType.Compass));
+        var iconFile = classId switch
+        {
+            "InferiusTeleportEfficiencyMK1" => "TeleportChipMK1.png",
+            "InferiusTeleportEfficiencyMK2" => "TeleportChipMK2.png",
+            "InferiusTeleportEfficiencyMK3" => "TeleportChipMK3.png",
+            _ => null,
+        };
+        info.WithIcon(iconFile != null
+            ? InferiusQoL.Assets.IconLoader.LoadOrFallback(iconFile, TechType.Compass)
+            : SpriteManager.Get(TechType.Compass));
         info.WithSizeInInventory(new Vector2int(1, 1));
 
         var prefab = new CustomPrefab(info);

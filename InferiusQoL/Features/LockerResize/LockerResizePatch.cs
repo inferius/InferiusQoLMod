@@ -19,19 +19,7 @@ public static class StorageContainer_Awake_Patch
         var techType = ResolveTechType(__instance.gameObject);
         int newW = 0, newH = 0;
 
-        switch (techType)
-        {
-            case TechType.Locker:
-                newW = cfg.LockerWidth;
-                newH = cfg.LockerHeight;
-                break;
-            case TechType.SmallLocker:
-                newW = cfg.WallLockerWidth;
-                newH = cfg.WallLockerHeight;
-                break;
-            default:
-                return;
-        }
+        if (!TryGetTargetSize(techType, cfg, out newW, out newH)) return;
 
         if (newW <= 0 || newH <= 0) return;
         if (__instance.width == newW && __instance.height == newH)
@@ -45,6 +33,25 @@ public static class StorageContainer_Awake_Patch
 
         __instance.Resize(newW, newH);
         QoLLog.Info(Category.Locker, $"{techType}: {oldW}x{oldH} -> {newW}x{newH}");
+    }
+
+    private static bool TryGetTargetSize(TechType techType, InferiusConfig cfg, out int w, out int h)
+    {
+        switch (techType)
+        {
+            case TechType.Locker:
+                w = cfg.LockerWidth; h = cfg.LockerHeight; return true;
+            case TechType.SmallLocker:
+                w = cfg.WallLockerWidth; h = cfg.WallLockerHeight; return true;
+            case TechType.SmallStorage:
+                w = cfg.WaterproofLockerWidth; h = cfg.WaterproofLockerHeight; return true;
+            case TechType.LuggageBag:
+                w = cfg.CarryallWidth; h = cfg.CarryallHeight; return true;
+            case TechType.VehicleStorageModule:
+                w = cfg.VehicleStorageWidth; h = cfg.VehicleStorageHeight; return true;
+            default:
+                w = 0; h = 0; return false;
+        }
     }
 
     private static TechType ResolveTechType(GameObject go)
@@ -80,20 +87,7 @@ public static class StorageContainer_Awake_Patch
         {
             if (sc == null) continue;
             var techType = ResolveTechType(sc.gameObject);
-            int newW = 0, newH = 0;
-            switch (techType)
-            {
-                case TechType.Locker:
-                    newW = cfg.LockerWidth;
-                    newH = cfg.LockerHeight;
-                    break;
-                case TechType.SmallLocker:
-                    newW = cfg.WallLockerWidth;
-                    newH = cfg.WallLockerHeight;
-                    break;
-                default:
-                    continue;
-            }
+            if (!TryGetTargetSize(techType, cfg, out int newW, out int newH)) continue;
             if (newW <= 0 || newH <= 0) continue;
             if (sc.width == newW && sc.height == newH) continue;
 

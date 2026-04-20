@@ -47,11 +47,29 @@ public class InferiusConfig : ConfigFile
     [Slider("  Locker height (rows)", 4, 16, DefaultValue = 8, Step = 1, Order = 202)]
     public int LockerHeight = 8;
 
-    [Slider("  Wall locker width", 2, 8, DefaultValue = 4, Step = 1, Order = 203)]
+    [Slider("  Wall locker width", 2, 5, DefaultValue = 4, Step = 1, Order = 203)]
     public int WallLockerWidth = 4;
 
-    [Slider("  Wall locker height", 2, 10, DefaultValue = 5, Step = 1, Order = 204)]
+    [Slider("  Wall locker height", 2, 7, DefaultValue = 5, Step = 1, Order = 204)]
     public int WallLockerHeight = 5;
+
+    [Slider("  Waterproof locker width", 3, 8, DefaultValue = 5, Step = 1, Order = 205)]
+    public int WaterproofLockerWidth = 5;
+
+    [Slider("  Waterproof locker height", 4, 10, DefaultValue = 7, Step = 1, Order = 206)]
+    public int WaterproofLockerHeight = 7;
+
+    [Slider("  Carryall width", 2, 6, DefaultValue = 3, Step = 1, Order = 207)]
+    public int CarryallWidth = 3;
+
+    [Slider("  Carryall height", 3, 8, DefaultValue = 6, Step = 1, Order = 208)]
+    public int CarryallHeight = 6;
+
+    [Slider("  Vehicle storage width", 4, 8, DefaultValue = 5, Step = 1, Order = 209)]
+    public int VehicleStorageWidth = 5;
+
+    [Slider("  Vehicle storage height", 4, 8, DefaultValue = 6, Step = 1, Order = 210)]
+    public int VehicleStorageHeight = 6;
 
     // =====================================================================
     // Backpacks
@@ -191,20 +209,20 @@ public class InferiusConfig : ConfigFile
     [Toggle("Enable Teleport Beacon", Order = 900)]
     public bool TeleportBeaconEnabled = true;
 
-    [Slider("  Source base cost (J)", 0, 5000, DefaultValue = 100, Step = 25, Order = 901)]
-    public int TeleportSourceCostJoules = 100;
+    [Slider("  Source base cost (J)", 0, 5000, DefaultValue = 250, Step = 25, Order = 901)]
+    public int TeleportSourceCostJoules = 250;
 
-    [Slider("  Target base cost (J)", 0, 5000, DefaultValue = 100, Step = 25, Order = 902)]
-    public int TeleportTargetCostJoules = 100;
+    [Slider("  Target base cost (J)", 0, 5000, DefaultValue = 250, Step = 25, Order = 902)]
+    public int TeleportTargetCostJoules = 250;
 
-    [Slider("  Min power on both bases (%)", 0, 100, DefaultValue = 20, Step = 5, Order = 903)]
-    public int TeleportMinBasePowerPercent = 20;
+    [Slider("  Min power on both bases (%)", 0, 100, DefaultValue = 30, Step = 5, Order = 903)]
+    public int TeleportMinBasePowerPercent = 30;
 
-    [Slider("  Cooldown (s)", 0, 300, DefaultValue = 15, Step = 5, Order = 904)]
-    public int TeleportCooldownSeconds = 15;
+    [Slider("  Cooldown (s)", 0, 300, DefaultValue = 20, Step = 5, Order = 904)]
+    public int TeleportCooldownSeconds = 20;
 
-    [Slider("  Energy cost per 100m (J)", 0, 500, DefaultValue = 20, Step = 5, Order = 905)]
-    public int TeleportCostPerHundredMeters = 20;
+    [Slider("  Energy cost per 100m (J)", 0, 500, DefaultValue = 40, Step = 5, Order = 905)]
+    public int TeleportCostPerHundredMeters = 40;
 
     [Slider("  Efficiency chip MK1 cost (%)", 10, 100, DefaultValue = 75, Step = 5, Order = 906)]
     public int TeleportEfficiencyMK1Percent = 75;

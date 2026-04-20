@@ -45,9 +45,7 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 ### Compatibility
 
 The mod detects and respects these other mods:
-- **RamunesCustomizedStorage** - our locker resize stays off when you have this installed
 - **AdvancedInventory** - our (planned) scrollable inventory stays off
-- **BagEquipment** - our backpacks stay off
 - **SlotExtender** - detected, extra Chip slots help with multi-chip setups
 
 ### Configuration

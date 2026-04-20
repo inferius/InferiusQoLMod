@@ -25,7 +25,7 @@ public static class CompressorItem
             "Advanced chip that compresses most inventory items to 1x1. Equip in a Chip slot.");
 
         // Placeholder ikona: Scanner (nejblizsi tool look).
-        info.WithIcon(SpriteManager.Get(TechType.Scanner));
+        info.WithIcon(InferiusQoL.Assets.IconLoader.LoadOrFallback("Lis.png", TechType.Scanner));
         info.WithSizeInInventory(new Vector2int(1, 1));
 
         var prefab = new CustomPrefab(info);

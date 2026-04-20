@@ -26,7 +26,7 @@ public static class TeleportBeaconItem
             "Teleport Beacon",
             "Stationary teleport device. Build 2+ across your bases to teleport between them.");
 
-        info.WithIcon(SpriteManager.Get(TechType.Beacon));
+        info.WithIcon(InferiusQoL.Assets.IconLoader.LoadOrFallback("Teleport.png", TechType.Beacon));
 
         var prefab = new CustomPrefab(info);
 

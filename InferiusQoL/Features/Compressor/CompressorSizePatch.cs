@@ -60,6 +60,15 @@ public static class InventoryItem_Constructor_Patch
         if (uid == null || string.IsNullOrEmpty(uid.Id)) return;
         if (!CompressorSaveManager.IsInstanceCompressed(uid.Id)) return;
 
+        // Self-cleanup: pokud TT je nyni v blacklistu (napr. user pridal nase
+        // custom items az dodatecne), smazeme marker a vratime vanilla velikost.
+        var tt = pickupable.GetTechType();
+        if (CompressorBlacklist.IsBlacklisted(tt))
+        {
+            CompressorSaveManager.Remove(uid.Id);
+            return;
+        }
+
         __instance._width = 1;
         __instance._height = 1;
     }
@@ -71,6 +80,12 @@ public static class ItemsContainer_AddItem_Patch
     [HarmonyPrefix]
     public static void Prefix(Pickupable pickupable)
     {
+        // Nestartuj kontext pokud je blacklisted - vanilla velikost je spravna.
+        if (pickupable != null && CompressorBlacklist.IsBlacklisted(pickupable.GetTechType()))
+        {
+            CompressorRenderContext.CurrentPickupable = null;
+            return;
+        }
         CompressorRenderContext.CurrentPickupable = pickupable;
     }
 

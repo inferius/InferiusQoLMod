@@ -31,41 +31,6 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
         if (_ui == null) _ui = gameObject.AddComponent<TeleportBeaconUI>();
     }
 
-    private void Start()
-    {
-        StartCoroutine(TrySwapMeshToAurora());
-    }
-
-    /// <summary>
-    /// Runtime nahrada modelu lavicky za mini-Auroru (StarshipSouvenir mesh).
-    /// Nacte StarshipSouvenir prefab async a nahradi MeshFilter/MeshRenderer.
-    /// </summary>
-    private System.Collections.IEnumerator TrySwapMeshToAurora()
-    {
-        var request = CraftData.GetPrefabForTechTypeAsync(TechType.StarshipSouvenir);
-        yield return request;
-
-        var sourcePrefab = request.GetResult();
-        if (sourcePrefab == null) yield break;
-
-        var sourceMF = sourcePrefab.GetComponentInChildren<MeshFilter>(true);
-        var sourceMR = sourcePrefab.GetComponentInChildren<MeshRenderer>(true);
-        if (sourceMF == null || sourceMR == null) yield break;
-
-        var destMF = GetComponentInChildren<MeshFilter>(true);
-        var destMR = GetComponentInChildren<MeshRenderer>(true);
-
-        if (destMF != null && sourceMF.sharedMesh != null)
-            destMF.sharedMesh = sourceMF.sharedMesh;
-
-        if (destMR != null && sourceMR.sharedMaterials != null && sourceMR.sharedMaterials.Length > 0)
-            destMR.sharedMaterials = sourceMR.sharedMaterials;
-
-        InferiusQoL.Logging.QoLLog.Debug(
-            InferiusQoL.Logging.Category.Teleport,
-            $"Swapped beacon mesh to Aurora mini (from StarshipSouvenir)");
-    }
-
     private void OnDisable()
     {
         All.Remove(this);
