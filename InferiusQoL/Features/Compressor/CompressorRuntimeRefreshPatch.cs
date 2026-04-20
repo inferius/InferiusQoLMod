@@ -133,41 +133,60 @@ public static class Compressor_Inventory_Awake_Patch
         var cfg = InferiusConfig.Instance;
         if (!cfg.CompressorEnabled) return;
 
-        // Jen kdyz je chip osazen.
         if (!CompressorItem.IsEquipped()) return;
 
         var pickupable = newItem.item;
         var tt = pickupable.GetTechType();
 
         if (CompressorBlacklist.IsBlacklisted(tt)) return;
-        if (newItem.width <= 1 && newItem.height <= 1) return;
 
         var uid = pickupable.GetComponent<UniqueIdentifier>();
         if (uid == null || string.IsNullOrEmpty(uid.Id)) return;
 
-        // Oznacit novou instanci.
+        // Oznacit novou instanci - persistentni marker.
         bool wasNew = CompressorSaveManager.MarkCompressed(uid.Id);
         if (wasNew)
             CompressorSaveManager.Save();
 
-        // Refresh jeden item (remove + add) aby InventoryItem constructor
-        // pouzil novou 1x1 velikost.
+        // Pokud je item uz 1x1 vanilla (napr. Creepvine, ores), nepotrebujeme
+        // refresh - layout je uz spravne umisten vanilla logikou. Jen mark
+        // (perzistentni flag) staci.
+        if (newItem.width <= 1 && newItem.height <= 1)
+        {
+            QoLLog.Debug(Category.Compressor,
+                $"Marked (no refresh needed, already 1x1): {tt} (uid {uid.Id})");
+            return;
+        }
+
+        // Pro vetsi items (> 1x1) refresh pres coroutine s 1 frame delay.
+        // Cas na vanilla AddItem flow dokoncit grid tracking, pak znovu AddItem
+        // uz s markered instance -> InventoryItem constructor nastavi _width=1
+        // a container najde 1x1 free space.
+        Player.main.StartCoroutine(DelayedSingleItemRefresh(pickupable, tt, uid.Id));
+    }
+
+    private static System.Collections.IEnumerator DelayedSingleItemRefresh(Pickupable pickupable, TechType tt, string uidId)
+    {
+        yield return null; // pockame jeden frame aby vanilla flow dokoncil
+
+        if (pickupable == null) yield break;
+
+        var inv = Inventory.main;
+        if (inv?.container == null) yield break;
+
         _isRefreshing = true;
         try
         {
-            var inv = Inventory.main;
-            if (inv?.container != null)
+            if (inv.container.RemoveItem(pickupable, forced: true))
             {
-                if (inv.container.RemoveItem(pickupable, forced: true))
-                    inv.container.AddItem(pickupable);
+                inv.container.AddItem(pickupable);
+                QoLLog.Info(Category.Compressor,
+                    $"Auto-compressed new pickup (deferred): {tt} (uid {uidId})");
             }
-
-            QoLLog.Info(Category.Compressor,
-                $"Auto-compressed new pickup: {tt} (uid {uid.Id})");
         }
         catch (Exception ex)
         {
-            QoLLog.Error(Category.Compressor, "Auto-compress failed", ex);
+            QoLLog.Error(Category.Compressor, "Deferred auto-compress failed", ex);
         }
         finally
         {
