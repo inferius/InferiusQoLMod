@@ -86,6 +86,10 @@
       <HintPath>$(GameManagedDir)\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(GameManagedDir)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Addressables">
       <HintPath>$(GameManagedDir)\Unity.Addressables.dll</HintPath>
       <Private>False</Private>

@@ -14,6 +14,7 @@ Modularni QoL balicek pro Subnauticu. Jeden mod obsahuje vsechna zlepseni nize -
 | **Reinforced + Hyper baterie** | Nove tiery baterii/power cellu s vyssi kapacitou (default 250/500 mid, 1500/3000 endgame). |
 | **Inventory Compressor chip** | Chip v Chip slotu - zmensi vsechny ne-blacklistovane items na 1x1. Per-instance persistent marker, funguje napric save/load a napric kontejnery. |
 | **Teleport Beacon** | Buildable teleport zarizeni. UI menu s pojmenovanim, vyberem cile, vzdalenosti, cenou. 3 efficiency chipy pro snizeni energy cost. Model mini-Aurory. |
+| **Locker Mover** *(od v0.2.0)* | Stehovani plnych skrini. Zamer na Locker/Wall Locker/Waterproof Locker/Carryall + stisk klavesy (default `G`) -> obsah do clipboardu. Stara skrin prazdna = deconstruct bezne. Opakovany stisk na nove prazdne skrini stejneho typu = obsah se presype zpet. Plne kompatibilni s Inventory Compressorem (slisovane polozky zustanou 1x1). Single-slot, in-memory (v1 neperzistuje pres save/quit). |
 
 ## Detekce konfliktu
 
@@ -64,6 +65,7 @@ Subnautica podporuje vice jazyku. Vsechny texty modu (nazvy itemu, tooltipy, kon
 | Baterie | [BatteryItems.cs](InferiusQoL/Features/Batteries/BatteryItems.cs) |
 | Compressor | [CompressorItem.cs](InferiusQoL/Features/Compressor/CompressorItem.cs), [CompressorSizePatch.cs](InferiusQoL/Features/Compressor/CompressorSizePatch.cs) |
 | Teleport Beacon | [TeleportBeaconItem.cs](InferiusQoL/Features/TeleportBeacon/TeleportBeaconItem.cs), [TeleportBeaconBehavior.cs](InferiusQoL/Features/TeleportBeacon/TeleportBeaconBehavior.cs) |
+| Locker Mover | [LockerMoverFeature.cs](InferiusQoL/Features/LockerMover/LockerMoverFeature.cs), [LockerMoverManager.cs](InferiusQoL/Features/LockerMover/LockerMoverManager.cs), [LockerMoverClipboard.cs](InferiusQoL/Features/LockerMover/LockerMoverClipboard.cs) |
 
 ## Licence
 

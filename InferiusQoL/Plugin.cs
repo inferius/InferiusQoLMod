@@ -10,6 +10,7 @@ using InferiusQoL.Console;
 using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Features.Batteries;
 using InferiusQoL.Features.Compressor;
+using InferiusQoL.Features.LockerMover;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Features.TankWelder;
 using InferiusQoL.Features.TeleportBeacon;
@@ -94,6 +95,11 @@ public class Plugin : BaseUnityPlugin
             TeleportBeaconSaveManager.Load();
             TeleportBeaconItem.Register();
             TeleportEfficiencyChips.Register();
+        }
+
+        if (cfg.LockerMoverEnabled)
+        {
+            LockerMoverFeature.Init();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

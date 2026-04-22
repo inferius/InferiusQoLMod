@@ -63,6 +63,10 @@
   "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cost (%)",
   "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cost (%)",
 
+  "Enable Locker Mover": "Enable Locker Mover",
+  "  Keybind": "  Keybind",
+  "  Require empty hands": "  Require empty hands",
+
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Verbosity: {0}",
@@ -79,6 +83,7 @@
   "InferiusQoL.Status.TankWelder": "TankWelder:",
   "InferiusQoL.Status.BatteryRework": "BatteryRework:",
   "InferiusQoL.Status.TeleportBeacon": "TeleportBeacon:",
+  "InferiusQoL.Status.LockerMover": "LockerMover:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Current log level: {0}. Usage: qol_log_level <None|Info|Debug|Trace>",
   "InferiusQoL.Console.LogLevelSet": "Log level set to: {0}",

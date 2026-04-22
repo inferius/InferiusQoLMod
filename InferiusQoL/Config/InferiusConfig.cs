@@ -242,6 +242,23 @@ public class InferiusConfig : ConfigFile
     };
 
     // =====================================================================
+    // Locker Mover (stehovani plnych skrini)
+    // =====================================================================
+
+    [Toggle("Enable Locker Mover", Order = 1000)]
+    public bool LockerMoverEnabled = true;
+
+    // KeyCode jmeno (viz UnityEngine.KeyCode). "G" = default. Pozdeji muzeme
+    // udelat proper dropdown; zatim stringova konfigurace je dostatecna.
+    [Choice("  Keybind",
+        new[] { "G", "H", "J", "K", "U", "P", "X", "B", "V", "N", "M" },
+        Order = 1001)]
+    public string LockerMoverKey = "G";
+
+    [Toggle("  Require empty hands", Order = 1002)]
+    public bool LockerMoverRequireEmptyHands = false;
+
+    // =====================================================================
     // Singleton
     // =====================================================================
 

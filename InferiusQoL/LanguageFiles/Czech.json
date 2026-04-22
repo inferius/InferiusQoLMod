@@ -71,6 +71,10 @@
   "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cena (%)",
   "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cena (%)",
 
+  "Enable Locker Mover": "Povolit Stěhování skříní",
+  "  Keybind": "  Klávesa",
+  "  Require empty hands": "  Vyžadovat prázdné ruce",
+
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Úroveň logování: {0}",
@@ -87,6 +91,7 @@
   "InferiusQoL.Status.TankWelder": "Spojování lahví:",
   "InferiusQoL.Status.BatteryRework": "Rework baterií:",
   "InferiusQoL.Status.TeleportBeacon": "Teleport Beacon:",
+  "InferiusQoL.Status.LockerMover": "Stěhování skříní:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Aktuální úroveň logu: {0}. Použití: qol_log_level <None|Info|Debug|Trace>",
   "InferiusQoL.Console.LogLevelSet": "Úroveň logu nastavena na: {0}",
