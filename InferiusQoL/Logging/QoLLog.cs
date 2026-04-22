@@ -16,7 +16,8 @@ public enum Category
     TankWelder,
     Battery,
     Teleport,
-    Oxygen
+    Oxygen,
+    LockerMover
 }
 
 public enum Verbosity

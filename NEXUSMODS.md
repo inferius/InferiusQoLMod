@@ -42,6 +42,12 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 - **3 Efficiency Chips** (MK1/MK2/MK3) - craft them and install directly in the beacon UI. Each tier reduces teleport cost (default 75% / 50% / 25% of base).
 - Teleport drops you exactly 2m in front of the target beacon, facing it - consistent landing.
 
+**Locker Mover** *(since v0.2.0)*
+- Relocate full lockers without manually unloading every item. Point at a full Locker / Wall Locker / Waterproof Locker / Carryall, press the keybind (default `G`) - the contents move to an in-memory clipboard and the locker becomes empty (ready to deconstruct).
+- Point at a new empty locker of the same type and press the key again - contents drop back in.
+- Fully compatible with the **Inventory Compressor**: compressed items stay 1×1 throughout the move.
+- Single-slot clipboard. Current limitation: contents are lost on save/quit while the clipboard is non-empty (v1 does not persist).
+
 ### Compatibility
 
 The mod detects and respects these other mods:
@@ -103,6 +109,12 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 - Energetická cena je úměrná vzdálenosti (základ + per-100m faktor).
 - **3 Efficiency čipy** (MK1/MK2/MK3) - vyrob je, osaď v UI majáku. Každý tier snižuje cenu (default 75% / 50% / 25% z plné).
 - Teleport tě přesně na 2 m před cílový maják, čelem k němu - konzistentní místo dopadu.
+
+**Stěhování skříní (Locker Mover)** *(od v0.2.0)*
+- Přesuň plnou skříň bez ručního vyndávání každé položky. Zaměř plný Locker / Wall Locker / Waterproof Locker / Carryall a stiskni klávesu (default `G`) - obsah se přesune do in-memory clipboardu, skříň zůstane prázdná (připravená k demontáži).
+- Zaměř novou prázdnou skříň stejného typu a stiskni klávesu znovu - obsah se přesype zpět.
+- Plně kompatibilní s **Inventory Compressorem**: slisované položky zůstávají 1×1 i během přesunu.
+- Single-slot clipboard. Aktuální omezení: obsah clipboardu nepřežije save/quit (v1 neperzistuje).
 
 ### Kompatibilita
 

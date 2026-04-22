@@ -42,6 +42,7 @@ public static class ConsoleCommands
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.TankWelder"),-18} {OnOff(c.TankWelderEnabled)} (T1 {c.TankWelderT1Multiplier:0.0}x / T2 {c.TankWelderT2Multiplier:0.0}x / T3 {c.TankWelderT3Multiplier:0.0}x)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.BatteryRework"),-18} {OnOff(c.BatteryReworkEnabled)} (B{c.VanillaBatteryCapacity}/PC{c.VanillaPowerCellCapacity}/RB{c.ReinforcedBatteryCapacity}/RPC{c.ReinforcedPowerCellCapacity}/HB{c.HyperBatteryCapacity}/HPC{c.HyperPowerCellCapacity})");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.TeleportBeacon"),-18} {OnOff(c.TeleportBeaconEnabled)} ({c.TeleportSourceCostJoules}+{c.TeleportTargetCostJoules} J, cd {c.TeleportCooldownSeconds}s, min {c.TeleportMinBasePowerPercent}%)");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.LockerMover"),-18} {OnOff(c.LockerMoverEnabled)} (key {c.LockerMoverKey}, clipboard: {(InferiusQoL.Features.LockerMover.LockerMoverClipboard.HasContent ? $"{InferiusQoL.Features.LockerMover.LockerMoverClipboard.ItemCount} items ({InferiusQoL.Features.LockerMover.LockerMoverClipboard.SourceTechType})" : "empty")})");
         return sb.ToString();
     }
 
