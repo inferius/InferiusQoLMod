@@ -75,12 +75,26 @@
   "  Keybind": "  Klávesa",
   "  Require empty hands": "  Vyžadovat prázdné ruce",
 
+  "Enable AutoCraft": "Povolit AutoCraft",
+  "  Use nearby storage": "  Používat okolní úložiště",
+  "  Range (m)": "  Dosah (m)",
+  "  Return surplus to": "  Vracet přebytky do",
+  "  Better ingredient tooltips": "  Lepší tooltip se surovinami",
+  "  Shift multiplier (batch)": "  Shift násobitel (batch)",
+  "  Ctrl multiplier (batch)": "  Ctrl násobitel (batch)",
+  "  Craft speed (%)": "  Rychlost kraftu (%)",
+
+  "Enable faster oxygen refill": "Povolit rychlejší doplňování kyslíku",
+  "  Refill rate (units/sec)": "  Rychlost doplňování (units/sec)",
+  "  Refill all tanks in inventory": "  Doplnit i lahve v inventáři",
+
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Úroveň logování: {0}",
   "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detekován: {0}",
   "InferiusQoL.Status.AdvancedInventory": "AdvancedInventory detekován: {0}",
   "InferiusQoL.Status.BagEquipment": "BagEquipment detekován: {0}",
+  "InferiusQoL.Status.EasyCraft": "EasyCraft detekován: {0}",
   "InferiusQoL.Status.Features": "Funkce:",
   "InferiusQoL.Status.InventoryResize": "Zvětšení inventáře:",
   "InferiusQoL.Status.LockerResize": "Zvětšení skříní:",
@@ -92,6 +106,8 @@
   "InferiusQoL.Status.BatteryRework": "Rework baterií:",
   "InferiusQoL.Status.TeleportBeacon": "Teleport Beacon:",
   "InferiusQoL.Status.LockerMover": "Stěhování skříní:",
+  "InferiusQoL.Status.AutoCraft": "AutoCraft:",
+  "InferiusQoL.Status.OxygenRefill": "Kyslík refill:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Aktuální úroveň logu: {0}. Použití: qol_log_level <None|Info|Debug|Trace>",
   "InferiusQoL.Console.LogLevelSet": "Úroveň logu nastavena na: {0}",

@@ -37,6 +37,7 @@ public class Plugin : BaseUnityPlugin
     internal static bool HasAdvancedInventory { get; private set; }
     internal static bool HasBagEquipment { get; private set; }
     internal static bool HasSlotExtender { get; private set; }
+    internal static bool HasEasyCraft { get; private set; }
 
     private void Awake()
     {
@@ -111,9 +112,29 @@ public class Plugin : BaseUnityPlugin
         // je uz kompletni. V Awake je detekce neuplna - nekteri pluginy se nacitaji pozdeji.
         DetectExternalMods();
 
-        // Harmony patche az po detekci, aby patche mohly checknout Plugin.HasX flagy.
-        Harmony.PatchAll(typeof(Plugin).Assembly);
-        QoLLog.Info(Category.Core, "Harmony patches applied");
+        // Per-class try/catch misto jednoho velkeho Harmony.PatchAll.
+        // Pokud jeden patch selze (napr. target metoda neexistuje), ostatni
+        // patche se stale nasadi. Puvodne: jedno PatchAll -> jeden exception ->
+        // zbytek patchu nenabehne -> Compressor + InventoryResize tichem selzou
+        // -> ztrata komprimovanych polozek (nefit pri vanilla size).
+        int ok = 0, failed = 0;
+        foreach (var type in typeof(Plugin).Assembly.GetTypes())
+        {
+            if (!type.IsClass) continue;
+            try
+            {
+                var processor = Harmony.CreateClassProcessor(type);
+                var patched = processor.Patch();
+                if (patched != null && patched.Count > 0) ok++;
+            }
+            catch (System.Exception ex)
+            {
+                failed++;
+                QoLLog.Error(Category.Core,
+                    $"Harmony patch failed for {type.FullName}: {ex.Message}", ex);
+            }
+        }
+        QoLLog.Info(Category.Core, $"Harmony patches applied (ok={ok}, failed={failed})");
     }
 
     private static void DetectExternalMods()
@@ -122,10 +143,19 @@ public class Plugin : BaseUnityPlugin
         HasAdvancedInventory = FindPlugin(new[] { "advancedinventory" }, out var aiInfo);
         HasBagEquipment = FindPlugin(new[] { "bagequipment" }, out var beInfo);
         HasSlotExtender = FindPlugin(new[] { "slotextender" }, out var seInfo);
+        HasEasyCraft = FindPlugin(new[] { "easycraft" }, out var ecInfo);
 
         LogDetection("CustomizedStorage", "locker resize", HasCustomizedStorage, csInfo);
         LogDetection("AdvancedInventory", "scrollable container", HasAdvancedInventory, aiInfo);
         LogDetection("BagEquipment", "batohy", HasBagEquipment, beInfo);
+        // EasyCraft: mame vlastni port (AutoCraft). Pokud je puvodni EasyCraft
+        // nainstalovan, upozornime usera - ma odinstalovat puvodni.
+        if (HasEasyCraft)
+            QoLLog.Warning(Category.Core,
+                $"Original EasyCraft detected: {ecInfo}. Nase AutoCraft je port EasyCraftu - "
+                + "odinstaluj puvodni EasyCraft at se patche nebiji.");
+        else
+            QoLLog.Info(Category.Core, "EasyCraft not detected (our AutoCraft port is active).");
         if (HasSlotExtender)
             QoLLog.Info(Category.Core, $"SlotExtender detected: {seInfo} - extra Chip slots available for backpacks.");
         else

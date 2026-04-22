@@ -140,6 +140,12 @@ public static class Compressor_Inventory_Awake_Patch
 
         if (CompressorBlacklist.IsBlacklisted(tt)) return;
 
+        // Vanilla 1x1 items (Creepvine, ores, Quartz, ...) NETAGUJEME.
+        // Marker by nic nezmensil, ale zpusobil by problem pri uninstalu
+        // modu - vanilla by je musela vratit na 1x1 coz je stejne jejich
+        // velikost, ale zbytecne zatezuje JSON a decompress proceduru.
+        if (newItem.width <= 1 && newItem.height <= 1) return;
+
         var uid = pickupable.GetComponent<UniqueIdentifier>();
         if (uid == null || string.IsNullOrEmpty(uid.Id)) return;
 
@@ -147,16 +153,6 @@ public static class Compressor_Inventory_Awake_Patch
         bool wasNew = CompressorSaveManager.MarkCompressed(uid.Id);
         if (wasNew)
             CompressorSaveManager.Save();
-
-        // Pokud je item uz 1x1 vanilla (napr. Creepvine, ores), nepotrebujeme
-        // refresh - layout je uz spravne umisten vanilla logikou. Jen mark
-        // (perzistentni flag) staci.
-        if (newItem.width <= 1 && newItem.height <= 1)
-        {
-            QoLLog.Debug(Category.Compressor,
-                $"Marked (no refresh needed, already 1x1): {tt} (uid {uid.Id})");
-            return;
-        }
 
         // Pro vetsi items (> 1x1) refresh pres coroutine s 1 frame delay.
         // Cas na vanilla AddItem flow dokoncit grid tracking, pak znovu AddItem

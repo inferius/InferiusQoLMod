@@ -67,12 +67,26 @@
   "  Keybind": "  Keybind",
   "  Require empty hands": "  Require empty hands",
 
+  "Enable AutoCraft": "Enable AutoCraft",
+  "  Use nearby storage": "  Use nearby storage",
+  "  Range (m)": "  Range (m)",
+  "  Return surplus to": "  Return surplus to",
+  "  Better ingredient tooltips": "  Better ingredient tooltips",
+  "  Shift multiplier (batch)": "  Shift multiplier (batch)",
+  "  Ctrl multiplier (batch)": "  Ctrl multiplier (batch)",
+  "  Craft speed (%)": "  Craft speed (%)",
+
+  "Enable faster oxygen refill": "Enable faster oxygen refill",
+  "  Refill rate (units/sec)": "  Refill rate (units/sec)",
+  "  Refill all tanks in inventory": "  Refill all tanks in inventory",
+
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
   "InferiusQoL.Status.Verbosity": "Verbosity: {0}",
   "InferiusQoL.Status.CustomizedStorage": "CustomizedStorage detected: {0}",
   "InferiusQoL.Status.AdvancedInventory": "AdvancedInventory detected: {0}",
   "InferiusQoL.Status.BagEquipment": "BagEquipment detected: {0}",
+  "InferiusQoL.Status.EasyCraft": "EasyCraft detected: {0}",
   "InferiusQoL.Status.Features": "Features:",
   "InferiusQoL.Status.InventoryResize": "InventoryResize:",
   "InferiusQoL.Status.LockerResize": "LockerResize:",
@@ -84,6 +98,8 @@
   "InferiusQoL.Status.BatteryRework": "BatteryRework:",
   "InferiusQoL.Status.TeleportBeacon": "TeleportBeacon:",
   "InferiusQoL.Status.LockerMover": "LockerMover:",
+  "InferiusQoL.Status.AutoCraft": "AutoCraft:",
+  "InferiusQoL.Status.OxygenRefill": "OxygenRefill:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Current log level: {0}. Usage: qol_log_level <None|Info|Debug|Trace>",
   "InferiusQoL.Console.LogLevelSet": "Log level set to: {0}",

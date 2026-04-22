@@ -15,6 +15,8 @@ Modularni QoL balicek pro Subnauticu. Jeden mod obsahuje vsechna zlepseni nize -
 | **Inventory Compressor chip** | Chip v Chip slotu - zmensi vsechny ne-blacklistovane items na 1x1. Per-instance persistent marker, funguje napric save/load a napric kontejnery. |
 | **Teleport Beacon** | Buildable teleport zarizeni. UI menu s pojmenovanim, vyberem cile, vzdalenosti, cenou. 3 efficiency chipy pro snizeni energy cost. Model mini-Aurory. |
 | **Locker Mover** *(od v0.2.0)* | Stehovani plnych skrini. Zamer na Locker/Wall Locker/Waterproof Locker/Carryall + stisk klavesy (default `G`) -> obsah do clipboardu. Stara skrin prazdna = deconstruct bezne. Opakovany stisk na nove prazdne skrini stejneho typu = obsah se presype zpet. Plne kompatibilni s Inventory Compressorem (slisovane polozky zustanou 1x1). Single-slot, in-memory (v1 neperzistuje pres save/quit). |
+| **AutoCraft** *(od v0.3.0, port EasyCraft)* | Fabricator/Workbench/Modification Station/Habitat Builder cerpaji suroviny z okolnich skrini (default Range 100m, konfigurovatelne 50-500m). Rekurzivni auto-craft chybejicich sub-ingredienci (hloubka 5). Lepsi ingredient tooltipy s aktualnim pockem. Shift+klik = x5 batch, Ctrl+klik = x10 batch. Craft speed slider 50-500% (zrychleni = vyssi spotreba). Return surplus do inventare nebo Auto-sorter lockeru. |
+| **Oxygen Auto-Refill** *(od v0.3.0)* | Rychlejsi doplneni O2 tanku pri vynoru nad hladinu nebo v moonpoolu/habitatu. Konfigurovatelna rate (vanilla 30/s, default 120/s). Toggle pro refill vsech lahvi v inventari (ne jen equipnute). |
 
 ## Detekce konfliktu
 
@@ -29,7 +31,15 @@ Pri startu detekujeme nainstalovane mody:
 - `qol_status` - prehled vsech featur + stav detekce
 - `qol_log_level <None|Info|Debug|Trace>` - runtime zmena verbosity
 - `qol_apply` - force reapply config (inventory)
+- `qol_compressor_decompress_all` - vymaze vsechny Compressor markery. **Spust pred uninstalem modu** jinak se komprimovane polozky pokusi vanilla Subnautica vratit na puvodni velikost a ty co se nevejdou zmizi.
 - Dalsi `qol_*` prikazy pro diagnostiku
+
+## Bezpecny uninstall
+
+Pri odebrani modu:
+1. Pred vypnuti Compressoru / uninstalem: spust `qol_compressor_decompress_all` v konzoli.
+2. Uvolni misto v inventari + skrinich - polozky se budou snazit vratit na vanilla velikost (napr. Quartz z 1x1 zpet na 1x1, ale veci ve skrinich se nemusi vejit pokud bylo napacovane).
+3. Save + reload. Polozky se rozbali na plnou velikost. Pokud nekde nezbyde misto, ztrati se.
 
 ## Konfigurace
 
@@ -66,6 +76,12 @@ Subnautica podporuje vice jazyku. Vsechny texty modu (nazvy itemu, tooltipy, kon
 | Compressor | [CompressorItem.cs](InferiusQoL/Features/Compressor/CompressorItem.cs), [CompressorSizePatch.cs](InferiusQoL/Features/Compressor/CompressorSizePatch.cs) |
 | Teleport Beacon | [TeleportBeaconItem.cs](InferiusQoL/Features/TeleportBeacon/TeleportBeaconItem.cs), [TeleportBeaconBehavior.cs](InferiusQoL/Features/TeleportBeacon/TeleportBeaconBehavior.cs) |
 | Locker Mover | [LockerMoverFeature.cs](InferiusQoL/Features/LockerMover/LockerMoverFeature.cs), [LockerMoverManager.cs](InferiusQoL/Features/LockerMover/LockerMoverManager.cs), [LockerMoverClipboard.cs](InferiusQoL/Features/LockerMover/LockerMoverClipboard.cs) |
+| AutoCraft | [AutoCraftMain.cs](InferiusQoL/Features/AutoCraft/AutoCraftMain.cs), [AutoCraftPatches.cs](InferiusQoL/Features/AutoCraft/AutoCraftPatches.cs), [ClosestItemContainers.cs](InferiusQoL/Features/AutoCraft/ClosestItemContainers.cs), [ClosestFabricators.cs](InferiusQoL/Features/AutoCraft/ClosestFabricators.cs) |
+| Oxygen Refill | [OxygenRefillPatch.cs](InferiusQoL/Features/OxygenRefill/OxygenRefillPatch.cs) |
+
+## Changelog
+
+Zmeny + bug fixy per verzi: [CHANGELOG.md](CHANGELOG.md).
 
 ## Licence
 

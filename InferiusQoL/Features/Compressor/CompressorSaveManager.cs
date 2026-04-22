@@ -100,6 +100,16 @@ public static class CompressorSaveManager
         return removed;
     }
 
+    /// <summary>Vymaze vsechny markery. Vraci pocet odstranenych. Pouzito pri
+    /// qol_compressor_decompress_all pred uninstalem modu.</summary>
+    public static int ClearAll()
+    {
+        var n = _compressedIds.Count;
+        _compressedIds.Clear();
+        Save();
+        return n;
+    }
+
     private static string? GetSavePath()
     {
         var dllDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
