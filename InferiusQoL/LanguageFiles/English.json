@@ -16,6 +16,12 @@
   "  Locker height (rows)": "  Locker height (rows)",
   "  Wall locker width": "  Wall locker width",
   "  Wall locker height": "  Wall locker height",
+  "  Waterproof locker width": "  Waterproof locker width",
+  "  Waterproof locker height": "  Waterproof locker height",
+  "  Carryall width": "  Carryall width",
+  "  Carryall height": "  Carryall height",
+  "  Vehicle storage width": "  Vehicle storage width",
+  "  Vehicle storage height": "  Vehicle storage height",
   "Enable backpacks": "Enable backpacks",
   "  Small backpack extra rows": "  Small backpack extra rows",
   "  Medium backpack extra rows": "  Medium backpack extra rows",
@@ -52,6 +58,10 @@
   "  Target base cost (J)": "  Target base cost (J)",
   "  Min power on both bases (%)": "  Min power on both bases (%)",
   "  Cooldown (s)": "  Cooldown (s)",
+  "  Energy cost per 100m (J)": "  Energy cost per 100m (J)",
+  "  Efficiency chip MK1 cost (%)": "  Efficiency chip MK1 cost (%)",
+  "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cost (%)",
+  "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cost (%)",
 
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",
