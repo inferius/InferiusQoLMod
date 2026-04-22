@@ -33,6 +33,11 @@ public static class BatteryItems
     public static TechType HyperBattery { get; private set; } = TechType.None;
     public static TechType HyperPowerCell { get; private set; } = TechType.None;
 
+    // Tracking pro EnergyMixinPatch - custom battery/power cell TechTypes
+    // ktere je potreba injektovat do compatibleBatteries listu na tools/vehicles.
+    public static readonly List<TechType> CustomBatteryTypes = new List<TechType>();
+    public static readonly List<TechType> CustomPowerCellTypes = new List<TechType>();
+
     public static void RegisterTabs()
     {
         var label = InferiusQoL.Localization.L.GetOrFallback(
@@ -195,6 +200,17 @@ public static class BatteryItems
         }
 
         prefab.Register();
+
+        // Track pro EnergyMixinPatch - batterie do BatteryTypes, power cells do PowerCellTypes.
+        if (isPowerCell)
+            CustomPowerCellTypes.Add(info.TechType);
+        else
+            CustomBatteryTypes.Add(info.TechType);
+
+        // Registrace 3D model source (clone vanilla model + swap texture)
+        if (iconFile != null)
+            EnergyMixin_Awake_Patch.RegisterModelSource(info.TechType, cloneFrom, iconFile);
+
         return info.TechType;
     }
 

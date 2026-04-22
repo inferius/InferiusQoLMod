@@ -17,6 +17,12 @@
   "  Locker height (rows)": "  Výška skříně (řádky)",
   "  Wall locker width": "  Šířka nástěnné skříně",
   "  Wall locker height": "  Výška nástěnné skříně",
+  "  Waterproof locker width": "  Šířka vodotěsné skříňky",
+  "  Waterproof locker height": "  Výška vodotěsné skříňky",
+  "  Carryall width": "  Šířka cestovní tašky",
+  "  Carryall height": "  Výška cestovní tašky",
+  "  Vehicle storage width": "  Šířka úložiště vozidla",
+  "  Vehicle storage height": "  Výška úložiště vozidla",
 
   "Enable backpacks": "Povolit batohy",
   "  Small backpack extra rows": "  Řádky navíc (Malý batoh)",
@@ -60,6 +66,10 @@
   "  Target base cost (J)": "  Cena na cílové základně (J)",
   "  Min power on both bases (%)": "  Min. energie obou základen (%)",
   "  Cooldown (s)": "  Cooldown (s)",
+  "  Energy cost per 100m (J)": "  Cena za každých 100 m (J)",
+  "  Efficiency chip MK1 cost (%)": "  Efficiency chip MK1 cena (%)",
+  "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cena (%)",
+  "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cena (%)",
 
 
   "InferiusQoL.Status.Header": "InferiusQoL v{0}",

@@ -49,4 +49,21 @@ public static class IconLoader
         var s = Load(fileName);
         return s ?? SpriteManager.Get(fallback);
     }
+
+    /// <summary>Nacte PNG jako Texture2D pro pouziti v materialu 3D modelu.</summary>
+    public static Texture2D? LoadTexture(string fileName)
+    {
+        var dllDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        if (string.IsNullOrEmpty(dllDir)) return null;
+
+        var path = Path.Combine(dllDir!, "Assets", "Icons", fileName);
+        if (!File.Exists(path)) return null;
+
+        try { return ImageUtils.LoadTextureFromFile(path); }
+        catch (System.Exception ex)
+        {
+            QoLLog.Error(Category.Core, $"Texture load exception for {fileName}", ex);
+            return null;
+        }
+    }
 }
