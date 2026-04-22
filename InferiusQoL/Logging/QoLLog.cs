@@ -17,7 +17,8 @@ public enum Category
     Battery,
     Teleport,
     Oxygen,
-    LockerMover
+    LockerMover,
+    AutoCraft
 }
 
 public enum Verbosity

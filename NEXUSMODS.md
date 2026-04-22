@@ -48,6 +48,19 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 - Fully compatible with the **Inventory Compressor**: compressed items stay 1×1 throughout the move.
 - Single-slot clipboard. Current limitation: contents are lost on save/quit while the clipboard is non-empty (v1 does not persist).
 
+**AutoCraft** *(since v0.3.0, port of EasyCraft by Wintik)*
+- Fabricator/Workbench/Modification Station/Habitat Builder/Mobile Vehicle Bay pull ingredients from **nearby storage** (default: Range 100m, configurable 50-500m; or Inside base/pod, or Off).
+- **Recursive auto-craft** of missing sub-ingredients (depth 5). If you have Titanium + Lithium but miss Plasteel, it crafts the Plasteel for you.
+- **Batch craft** - hold **Shift** (default x5) or **Ctrl** (default x10) while clicking a recipe. Multipliers configurable. If you don't have enough for the full batch, scales down to the maximum you can afford.
+- **Craft speed** slider (50-500%, default 100% = vanilla). Faster crafting drains proportionally more energy.
+- **Better ingredient tooltips** - shows current count vs required.
+- **Return surplus** - leftover crafted items go to Inventory or nearest Autosorter locker (configurable).
+
+**Oxygen Auto-Refill** *(since v0.3.0)*
+- Faster oxygen tank refill when you surface above water or enter a moonpool/habitat. Vanilla rate is 30 units/sec; default here is 120/sec (configurable up to 300).
+- Toggle: refill **all oxygen tanks in your inventory**, not just the equipped one.
+- No free oxygen underwater - refill only triggers where vanilla already breathes you (surface + pressurised interiors).
+
 ### Compatibility
 
 The mod detects and respects these other mods:
@@ -59,6 +72,15 @@ The mod detects and respects these other mods:
 - **Options menu** (Options → Mods) - each feature has its own section with toggles and sliders. Changes are saved to `BepInEx/config/InferiusQoL/config.json` and applied at runtime where possible.
 - **Blacklist file** at `BepInEx/plugins/InferiusQoL/Data/CompressorBlacklist.json` - edit which TechTypes the Compressor cannot shrink (fish, eggs, batteries, tanks by default).
 - **Console commands** (`~` key): `qol_status` for overview, `qol_log_level` to change verbosity, and more.
+
+### Uninstall procedure (important)
+
+The **Inventory Compressor** uses per-instance markers stored in a JSON file. If you uninstall the mod while compressed items are still in your inventory or lockers, vanilla Subnautica will try to place them at their original (large) sizes - items that don't fit can be lost.
+
+Before uninstalling:
+1. Open the console (`~`) and run `qol_compressor_decompress_all` to clear the markers.
+2. Free up space in your inventory and lockers - expect items to grow back to vanilla size.
+3. Save and reload. Items take their vanilla size. Any that don't fit are lost.
 
 ### Requirements
 
@@ -116,6 +138,19 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 - Plně kompatibilní s **Inventory Compressorem**: slisované položky zůstávají 1×1 i během přesunu.
 - Single-slot clipboard. Aktuální omezení: obsah clipboardu nepřežije save/quit (v1 neperzistuje).
 
+**AutoCraft** *(od v0.3.0, port mod EasyCraft od Wintik)*
+- Fabricator/Workbench/Modification Station/Habitat Builder/Mobile Vehicle Bay čerpají suroviny z **okolních skříní** (default: Range 100m, konfigurovatelné 50-500m; nebo Inside base/pod, nebo Off).
+- **Rekurzivní auto-craft** chybějících sub-ingrediencí (hloubka 5). Když máš Titanium + Lithium ale chybí Plasteel, mod ti Plasteel sám vytvoří.
+- **Batch craft** - drž **Shift** (default x5) nebo **Ctrl** (default x10) při kliknutí na recept. Násobiče konfigurovatelné. Pokud nemáš dost na plný batch, scale-down na maximum které si můžeš dovolit.
+- **Craft speed** slider (50-500%, default 100% = vanilla). Zrychlení = poměrně vyšší spotřeba energie.
+- **Lepší tooltipy** s aktuálním počtem surovin vs. potřeba.
+- **Return surplus** - přebytky z auto-craftu jdou do Inventáře nebo nejbližší Autosorter skříně (konfigurovatelné).
+
+**Auto-doplnění kyslíku** *(od v0.3.0)*
+- Rychlejší doplnění O2 tanku po vynoru nad hladinu nebo v moonpoolu/habitatu. Vanilla = 30 units/sec, default zde 120/sec (konfigurovatelné až 300).
+- Toggle: doplnit **všechny lahve v inventáři**, ne jen equipnutou.
+- Žádný kyslík zdarma pod vodou - refill se spouští jen tam, kde tě vanilla i tak dýchá (hladina + pressurizované interiéry).
+
 ### Kompatibilita
 
 Mod detekuje a respektuje tyto další mody:
@@ -129,6 +164,15 @@ Mod detekuje a respektuje tyto další mody:
 - **Options menu** (Options → Mods) - každá featura má vlastní sekci s toggly a slidery. Změny se uloží do `BepInEx/config/InferiusQoL/config.json` a aplikují runtime kde je to možné.
 - **Blacklist soubor** v `BepInEx/plugins/InferiusQoL/Data/CompressorBlacklist.json` - edituj který TechType Compressor nezmenšuje.
 - **Konzolové příkazy** (`~` klávesa): `qol_status` pro přehled, `qol_log_level` pro změnu verbosity, další.
+
+### Postup před odinstalací (důležité)
+
+**Inventory Compressor** používá per-instance markery uložené v JSON souboru. Pokud mod odinstaluješ zatímco máš komprimované položky v inventáři nebo skříních, vanilla Subnautica se je pokusí vrátit na původní (velkou) velikost - položky, které se nevejdou, se mohou ztratit.
+
+Před odinstalací:
+1. Otevři konzoli (`~`) a spusť `qol_compressor_decompress_all` pro vymazání markerů.
+2. Uvolni místo v inventáři a skříních - počítej s tím, že se věci zvětší.
+3. Save a reload. Položky se rozbalí na vanilla velikost. Co se nevejde, ztratí se.
 
 ### Požadavky
 

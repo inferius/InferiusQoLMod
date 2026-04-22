@@ -259,6 +259,51 @@ public class InferiusConfig : ConfigFile
     public bool LockerMoverRequireEmptyHands = false;
 
     // =====================================================================
+    // AutoCraft (integrace EasyCraft)
+    // =====================================================================
+
+    [Toggle("Enable AutoCraft", Order = 1100)]
+    public bool AutoCraftEnabled = true;
+
+    // Range jako prvni = defaultni volba v Nautilus Choice dropdownu.
+    [Choice("  Use nearby storage", new[] { "Range", "Inside base/pod", "Off" }, Order = 1101)]
+    public string AutoCraftUseStorage = "Range";
+
+    [Slider("  Range (m)", 50, 500, DefaultValue = 100, Step = 10, Order = 1102)]
+    public int AutoCraftRangeMeters = 100;
+
+    [Choice("  Return surplus to", new[] { "Inventory", "Lockers" }, Order = 1103)]
+    public string AutoCraftReturnSurplus = "Inventory";
+
+    [Toggle("  Better ingredient tooltips", Order = 1104)]
+    public bool AutoCraftBetterTooltips = true;
+
+    [Slider("  Shift multiplier (batch)", 1, 20, DefaultValue = 5, Step = 1, Order = 1105)]
+    public int AutoCraftShiftMultiplier = 5;
+
+    [Slider("  Ctrl multiplier (batch)", 1, 50, DefaultValue = 10, Step = 1, Order = 1106)]
+    public int AutoCraftCtrlMultiplier = 10;
+
+    // 100 = vanilla rychlost + spotreba. 200 = 2x rychlejsi + 2x spotreba. Skaluje
+    // duration (1/mult) i energy cost (mult).
+    [Slider("  Craft speed (%)", 50, 500, DefaultValue = 100, Step = 10, Order = 1107)]
+    public int AutoCraftSpeedPercent = 100;
+
+    // =====================================================================
+    // Oxygen Auto-Refill
+    // =====================================================================
+
+    [Toggle("Enable faster oxygen refill", Order = 1200)]
+    public bool OxygenRefillEnabled = true;
+
+    // Vanilla = 30 units/sec pri vynoru/v base. Zvysene -> rychlejsi refill tanku.
+    [Slider("  Refill rate (units/sec)", 30, 300, DefaultValue = 120, Step = 10, Order = 1201)]
+    public int OxygenRefillRate = 120;
+
+    [Toggle("  Refill all tanks in inventory", Order = 1202)]
+    public bool OxygenRefillInventoryTanks = true;
+
+    // =====================================================================
     // Singleton
     // =====================================================================
 

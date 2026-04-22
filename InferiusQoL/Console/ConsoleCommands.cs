@@ -31,6 +31,7 @@ public static class ConsoleCommands
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.CustomizedStorage", Plugin.HasCustomizedStorage)}");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.AdvancedInventory", Plugin.HasAdvancedInventory)}");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.BagEquipment", Plugin.HasBagEquipment)}");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.EasyCraft", Plugin.HasEasyCraft)}");
         sb.AppendLine($"  SlotExtender detected:      {Plugin.HasSlotExtender}");
         sb.AppendLine(L.Get("InferiusQoL.Status.Features"));
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.InventoryResize"),-18} {OnOff(c.InventoryResizeEnabled)} (+{c.InventoryExtraRows}R/+{c.InventoryExtraCols}C)");
@@ -43,6 +44,8 @@ public static class ConsoleCommands
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.BatteryRework"),-18} {OnOff(c.BatteryReworkEnabled)} (B{c.VanillaBatteryCapacity}/PC{c.VanillaPowerCellCapacity}/RB{c.ReinforcedBatteryCapacity}/RPC{c.ReinforcedPowerCellCapacity}/HB{c.HyperBatteryCapacity}/HPC{c.HyperPowerCellCapacity})");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.TeleportBeacon"),-18} {OnOff(c.TeleportBeaconEnabled)} ({c.TeleportSourceCostJoules}+{c.TeleportTargetCostJoules} J, cd {c.TeleportCooldownSeconds}s, min {c.TeleportMinBasePowerPercent}%)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.LockerMover"),-18} {OnOff(c.LockerMoverEnabled)} (key {c.LockerMoverKey}, clipboard: {(InferiusQoL.Features.LockerMover.LockerMoverClipboard.HasContent ? $"{InferiusQoL.Features.LockerMover.LockerMoverClipboard.ItemCount} items ({InferiusQoL.Features.LockerMover.LockerMoverClipboard.SourceTechType})" : "empty")})");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.AutoCraft"),-18} {OnOff(c.AutoCraftEnabled)} (storage: {c.AutoCraftUseStorage}, return: {c.AutoCraftReturnSurplus}, tooltips: {OnOff(c.AutoCraftBetterTooltips)})");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.OxygenRefill"),-18} {OnOff(c.OxygenRefillEnabled)} ({c.OxygenRefillRate} units/s)");
         return sb.ToString();
     }
 
@@ -70,6 +73,21 @@ public static class ConsoleCommands
 
     [ConsoleCommand("qol_migrate_batteries")]
     public static string QolMigrateBatteries() => L.Get("InferiusQoL.Console.NotImplemented", "battery_rework");
+
+    /// <summary>
+    /// Bezpecne dekomprimuje vsechny komprimovane polozky: najde je v inventari
+    /// hrace + vsech StorageContainer v scene, vyjme z kontejneru, dropne jako
+    /// world loot u hrace, vymaze marker. Pri nasledujicim pickupu se vlozi
+    /// vanilla velikosti.
+    ///
+    /// Pouzit PRED uninstalem modu - jinak vanilla Subnautica nevi o markerech
+    /// a komprimovane polozky se pri loadu nemusi vejit na puvodni misto.
+    /// </summary>
+    [ConsoleCommand("qol_compressor_decompress_all")]
+    public static string QolCompressorDecompressAll()
+    {
+        return InferiusQoL.Features.Compressor.CompressorDecompressAll.Run();
+    }
 
     private static string OnOff(bool v) => v ? L.Get("InferiusQoL.On") : L.Get("InferiusQoL.Off");
 }
