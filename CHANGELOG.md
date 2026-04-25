@@ -2,7 +2,7 @@
 
 Vsechny zmeny v Inferius Quality of Life modu.
 
-## v0.3.1
+## v0.3.3
 
 ### Opraveno
 - **Reinforced/Hyper baterie + power celly nesly do nabijecek** - `BatteryCharger.compatibleTech` + `PowerCellCharger.compatibleTech` jsou staticky HashSets s vanilla TechTypes; nase custom typy nebyly v listu. Navic Nautilus `CloneTemplate` neprenasi `EquipmentType` z TechData. Fix: `BatteryItems.InjectIntoChargers()` pridava nase TT do obou HashSetu + explicitni `prefab.SetEquipment(EquipmentType.BatteryCharger / PowerCellCharger)`.
