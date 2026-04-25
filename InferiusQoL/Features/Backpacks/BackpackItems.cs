@@ -29,6 +29,11 @@ public static class BackpackItems
 
     public static void Register()
     {
+        // Bez radial menu modu se Workbench taby prekryvaji - place upgrady
+        // do rootu (prazdny tabPath = root). Small backpack je vzdy ve Fabricatoru
+        // Personal/Equipment (tab existuje vanilla).
+        var workbenchTab = Plugin.HasRadialMenu ? new[] { "BackpackMenu" } : new string[0];
+
         Small = RegisterTier(
             classId: "InferiusBackpackSmall",
             displayName: "Small Backpack",
@@ -66,7 +71,7 @@ public static class BackpackItems
                 }
             },
             fabricator: CraftTree.Type.Workbench,
-            tabPath: new[] { "BackpackMenu" });
+            tabPath: workbenchTab);
 
         Large = RegisterTier(
             classId: "InferiusBackpackLarge",
@@ -86,7 +91,7 @@ public static class BackpackItems
                 }
             },
             fabricator: CraftTree.Type.Workbench,
-            tabPath: new[] { "BackpackMenu" });
+            tabPath: workbenchTab);
 
         QoLLog.Info(Category.Backpack,
             $"Registered backpacks: Small={Small}, Medium={Medium}, Large={Large}");
@@ -98,9 +103,10 @@ public static class BackpackItems
     /// </summary>
     public static void RegisterTabs()
     {
-        // CraftTree tab labels se rendruji primo bez Language lookupu (na rozdil od
-        // Options sliderů). Musime label rozhodnout imperativne pri registraci,
-        // L.GetOrFallback udela lookup v Language.main nebo vrati anglicky fallback.
+        // Bez radial menu modu Workbench taby prekryvaji - skip tab creation,
+        // upgrady jdou do rootu Workbenchu.
+        if (!Plugin.HasRadialMenu) return;
+
         var label = InferiusQoL.Localization.L.GetOrFallback(
             "InferiusQoL.Tab.BackpackUpgrades",
             "Backpack Upgrades");

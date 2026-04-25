@@ -15,7 +15,7 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 **Inventory**
 - **Enlarge player inventory** - add configurable rows/columns. Runtime updates when you move the slider.
 - **Bigger lockers** - resize vanilla Locker and Wall Locker to custom dimensions (default 6×8 / 4×5). Works both on newly-built and existing lockers.
-- **Inventory Compressor chip** - equip in Chip slot to shrink every non-blacklisted item to 1×1. Persistent across save/load, base storage, vehicles. User-editable blacklist (fish, eggs, batteries, tanks).
+- **Inventory Compressor chip** *(Experimental, temporarily hidden from crafting since v0.3.1)* - equip in Chip slot to shrink every non-blacklisted item to 1×1. Persistent across save/load, base storage, vehicles. User-editable blacklist (fish, eggs, batteries, tanks). **Hidden from crafting by default** - toggle `Craftable (Experimental)` in Options or `spawn InferiusCompressor` in console. **Warning**: once equipped, compressed items get persistent markers in `compressed-items.json`. Uninstalling the mod without running `qol_compressor_decompress_all` first may cause unpredictable behavior / item loss. If you never equip the chip, no persistent data is created - safe to uninstall.
 
 **Backpacks** (3 tiers)
 - Equip in Chip slot for extra inventory rows. Progressive recipe chain: Small → Medium → Large. Each tier consumes the previous + new materials.
@@ -105,7 +105,7 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 **Inventář**
 - **Zvětšený inventář hráče** - přidání konfigurovatelných řádků/sloupců. Změna sliderů v Options se projeví ihned.
 - **Větší skříně** - mění vanilla Locker a Wall Locker na vlastní rozměry (default 6×8 / 4×5). Funguje na nově postavené i existující skříně.
-- **Inventory Compressor chip** - osaď do Chip slotu a všechny položky mimo blacklist se zmenší na 1×1. Perzistentní napříč save/load, skříněmi i vozidly. Uživatelsky editovatelný blacklist (ryby, vajíčka, baterie, lahve).
+- **Inventory Compressor chip** *(Experimentální, od v0.3.1 dočasně skryt z craftingu)* - osaď do Chip slotu a všechny položky mimo blacklist se zmenší na 1×1. Perzistentní napříč save/load, skříněmi i vozidly. Uživatelsky editovatelný blacklist (ryby, vajíčka, baterie, lahve). **Dočasně skryt z craftingu** - lze zapnout v Options (`Craftable (Experimentální)` toggle) nebo spawnout `spawn InferiusCompressor` v konzoli. **Pozor**: po osazení a kompresi položek se vytvoří persistentní markery (`compressed-items.json`). Při odinstalaci modu bez předchozího `qol_compressor_decompress_all` může dojít k nepředvídatelnému chování / ztrátě položek. Pokud chip nikdy neosadíš, žádná persistentní data se nevytvoří - bezpečné k odinstalaci.
 
 **Batohy** (3 tiery)
 - Osazují se do Chip slotu, každý tier přidá extra řádky. Progresivní recept: Malý → Střední → Velký. Vyšší tier spotřebuje nižší + další materiály.

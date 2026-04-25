@@ -143,6 +143,12 @@ public class InferiusConfig : ConfigFile
     [Toggle("Enable Compressor (item press)", Order = 600)]
     public bool CompressorEnabled = true;
 
+    // Pokud false, Compressor chip nebude v craft tree a neni v PDA. TechType
+    // se stale registruje takze `spawn InferiusCompressor` v konzoli funguje.
+    // Feature je pozastavena - existujici komprimovane polozky stale dekomprimuji.
+    [Toggle("  Craftable (Experimental)", Order = 603)]
+    public bool CompressorCraftable = false;
+
     [Toggle("  Requires energy to compress", Order = 601)]
     public bool CompressorRequiresEnergy = true;
 

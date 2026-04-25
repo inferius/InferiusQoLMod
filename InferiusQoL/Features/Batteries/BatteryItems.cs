@@ -40,6 +40,8 @@ public static class BatteryItems
 
     public static void RegisterTabs()
     {
+        if (!Plugin.HasRadialMenu) return;
+
         var label = InferiusQoL.Localization.L.GetOrFallback(
             "InferiusQoL.Tab.BatteryUpgrades",
             "Battery Upgrades");
@@ -146,6 +148,30 @@ public static class BatteryItems
 
         QoLLog.Info(Category.Battery,
             $"Registered Batteries: Reinforced {ReinforcedBattery}/{ReinforcedPowerCell}, Hyper {HyperBattery}/{HyperPowerCell}");
+
+        InjectIntoChargers();
+    }
+
+    /// <summary>
+    /// Pridava nase TechTypes do statickych HashSetu BatteryCharger.compatibleTech
+    /// + PowerCellCharger.compatibleTech. Bez toho nabijecky odmitnou nase
+    /// custom baterie/clanky - vanilla check `allowedTech.Contains(tt)`.
+    /// </summary>
+    private static void InjectIntoChargers()
+    {
+        foreach (var tt in CustomBatteryTypes)
+        {
+            if (tt != TechType.None && !BatteryCharger.compatibleTech.Contains(tt))
+                BatteryCharger.compatibleTech.Add(tt);
+        }
+        foreach (var tt in CustomPowerCellTypes)
+        {
+            if (tt != TechType.None && !PowerCellCharger.compatibleTech.Contains(tt))
+                PowerCellCharger.compatibleTech.Add(tt);
+        }
+        QoLLog.Info(Category.Battery,
+            $"Charger compatibility injected: BatteryCharger={BatteryCharger.compatibleTech.Count} types, "
+            + $"PowerCellCharger={PowerCellCharger.compatibleTech.Count} types");
     }
 
     private static TechType RegisterBattery(
@@ -183,18 +209,25 @@ public static class BatteryItems
         prefab.SetPdaGroupCategory(TechGroup.Resources, TechCategory.Electronics);
         prefab.SetUnlock(unlockAfter);
 
+        // EXPLICITNI EquipmentType - Nautilus CloneTemplate nezkopíruje TechData
+        // entries (equipmentType per TT). Bez toho `Equipment.AddItem` slot
+        // type check selze a charger nas item odmitne i kdyz je v allowedTech.
+        prefab.SetEquipment(isPowerCell ? EquipmentType.PowerCellCharger : EquipmentType.BatteryCharger);
+
         var crafting = prefab.SetRecipe(recipe).WithCraftingTime(5f);
 
         if (isHyper)
         {
-            // Hyper tier = endgame v Modification Station, vlastni tab
-            crafting.WithFabricatorType(CraftTree.Type.Workbench)
-                .WithStepsToFabricatorTab("BatteryUpgradesMenu");
+            // Hyper tier = endgame v Modification Station. S radial menu modem
+            // do BatteryUpgradesMenu tabu, jinak primo do rootu Workbenchu.
+            var hyperCrafting = crafting.WithFabricatorType(CraftTree.Type.Workbench);
+            if (Plugin.HasRadialMenu)
+                hyperCrafting.WithStepsToFabricatorTab("BatteryUpgradesMenu");
         }
         else
         {
             // Reinforced tier = standardni Fabricator, Resources/Electronics
-            // (vedle vanilla Battery/PowerCell)
+            // (vedle vanilla Battery/PowerCell). Vanilla taby - vzdy ok.
             crafting.WithFabricatorType(CraftTree.Type.Fabricator)
                 .WithStepsToFabricatorTab("Resources", "Electronics");
         }

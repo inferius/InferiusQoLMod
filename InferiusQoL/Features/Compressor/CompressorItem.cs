@@ -1,6 +1,7 @@
 namespace InferiusQoL.Features.Compressor;
 
 using System.Collections.Generic;
+using InferiusQoL.Config;
 using InferiusQoL.Logging;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
@@ -30,23 +31,34 @@ public static class CompressorItem
 
         var prefab = new CustomPrefab(info);
         prefab.SetGameObject(new CloneTemplate(info, TechType.Compass));
-        prefab.SetPdaGroupCategory(TechGroup.Personal, TechCategory.Equipment);
-        prefab.SetUnlock(TechType.AdvancedWiringKit); // mid-late game unlock
 
-        prefab.SetRecipe(new RecipeData
+        var cfg = InferiusConfig.Instance;
+        if (cfg.CompressorCraftable)
         {
-            craftAmount = 1,
-            Ingredients = new List<Ingredient>
+            // Full craft integration - PDA + craft tree + unlock.
+            prefab.SetPdaGroupCategory(TechGroup.Personal, TechCategory.Equipment);
+            prefab.SetUnlock(TechType.AdvancedWiringKit);
+
+            var crafting = prefab.SetRecipe(new RecipeData
             {
-                new Ingredient(TechType.AdvancedWiringKit, 1),
-                new Ingredient(TechType.Magnetite, 2),
-                new Ingredient(TechType.Aerogel, 1),
-                new Ingredient(TechType.Polyaniline, 1),
-            }
-        })
-        .WithFabricatorType(CraftTree.Type.Workbench)
-        .WithStepsToFabricatorTab("CompressorMenu")
-        .WithCraftingTime(10f);
+                craftAmount = 1,
+                Ingredients = new List<Ingredient>
+                {
+                    new Ingredient(TechType.AdvancedWiringKit, 1),
+                    new Ingredient(TechType.Magnetite, 2),
+                    new Ingredient(TechType.Aerogel, 1),
+                    new Ingredient(TechType.Polyaniline, 1),
+                }
+            })
+            .WithFabricatorType(CraftTree.Type.Workbench)
+            .WithCraftingTime(10f);
+            if (Plugin.HasRadialMenu)
+                crafting.WithStepsToFabricatorTab("CompressorMenu");
+        }
+        else
+        {
+            //QoLLog.Info(Category.Compressor, "Compressor NOT craftable (config). TechType registered, use `spawn InferiusCompressor` in console.");
+        }
 
         prefab.SetEquipment(EquipmentType.Chip)
             .WithQuickSlotType(QuickSlotType.Passive);
@@ -59,6 +71,11 @@ public static class CompressorItem
 
     public static void RegisterTabs()
     {
+        // Tab registrujeme jen kdyz je chip craftable - jinak prazdny tab v Workbench.
+        if (!InferiusConfig.Instance.CompressorCraftable) return;
+        // Bez radial menu modu Workbench taby prekryvaji - skip.
+        if (!Plugin.HasRadialMenu) return;
+
         var label = InferiusQoL.Localization.L.GetOrFallback(
             "InferiusQoL.Tab.Compressor",
             "Inventory Compressor");

@@ -30,16 +30,19 @@ public static class SeamothTurboItems
 
     public static void Register()
     {
-        // Vlastni tab v Modification Station (Workbench) pro MK2/MK3.
-        // Pridavame drive nez registrujeme prefabs, at ma craft tree cilovy tab.
-        var label = InferiusQoL.Localization.L.GetOrFallback(
-            "InferiusQoL.Tab.SeamothTurboUpgrades",
-            "Seamoth Turbo Upgrades");
-        Nautilus.Handlers.CraftTreeHandler.AddTabNode(
-            CraftTree.Type.Workbench,
-            "SeamothTurboMenu",
-            label,
-            SpriteManager.Get(TechType.SeamothElectricalDefense));
+        // Vlastni tab v Modification Station (Workbench) pro MK2/MK3 - jen
+        // pokud je radial menu mod, jinak Workbench taby prekryvaji.
+        if (Plugin.HasRadialMenu)
+        {
+            var label = InferiusQoL.Localization.L.GetOrFallback(
+                "InferiusQoL.Tab.SeamothTurboUpgrades",
+                "Seamoth Turbo Upgrades");
+            Nautilus.Handlers.CraftTreeHandler.AddTabNode(
+                CraftTree.Type.Workbench,
+                "SeamothTurboMenu",
+                label,
+                SpriteManager.Get(TechType.SeamothElectricalDefense));
+        }
 
         // MK1 - ve Vehicle Upgrade Console (Moonpool), vedle vanilla Seamoth modulu.
         MK1 = RegisterTier(
@@ -134,10 +137,13 @@ public static class SeamothTurboItems
         prefab.SetGameObject(new CloneTemplate(info, TechType.SeamothSolarCharge));
         prefab.SetPdaGroupCategory(TechGroup.VehicleUpgrades, TechCategory.VehicleUpgrades);
         prefab.SetUnlock(unlockAfter);
-        prefab.SetRecipe(recipe)
+        var crafting = prefab.SetRecipe(recipe)
             .WithFabricatorType(fabricator)
-            .WithStepsToFabricatorTab(fabricatorTab)
             .WithCraftingTime(5f);
+        // SeamothTurboMenu je nas custom Workbench tab - pouzijeme jen kdyz radial menu.
+        // Vehicle Upgrade Console (MK1) ma vanilla taby, ty pouzivame vzdy.
+        if (fabricator != CraftTree.Type.Workbench || Plugin.HasRadialMenu)
+            crafting.WithStepsToFabricatorTab(fabricatorTab);
         prefab.SetEquipment(EquipmentType.VehicleModule)
             .WithQuickSlotType(QuickSlotType.Passive);
 

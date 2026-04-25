@@ -1,6 +1,7 @@
 namespace InferiusQoL.Features.TeleportBeacon;
 
 using System.Collections.Generic;
+using InferiusQoL.Config;
 using InferiusQoL.Logging;
 using Nautilus.Assets;
 using Nautilus.Assets.Gadgets;
@@ -99,10 +100,12 @@ public static class TeleportEfficiencyChips
         prefab.SetPdaGroupCategory(TechGroup.Personal, TechCategory.Equipment);
         prefab.SetUnlock(unlockAfter);
 
-        prefab.SetRecipe(recipe)
+        var crafting = prefab.SetRecipe(recipe)
             .WithFabricatorType(CraftTree.Type.Workbench)
-            .WithStepsToFabricatorTab("CompressorMenu") // reuse compressor tab for now
             .WithCraftingTime(5f);
+        // CompressorMenu tab existuje jen s radial menu - jinak root.
+        if (Plugin.HasRadialMenu && InferiusConfig.Instance.CompressorCraftable)
+            crafting.WithStepsToFabricatorTab("CompressorMenu");
 
         prefab.Register();
         return info.TechType;

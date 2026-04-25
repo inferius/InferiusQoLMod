@@ -38,6 +38,7 @@ public class Plugin : BaseUnityPlugin
     internal static bool HasBagEquipment { get; private set; }
     internal static bool HasSlotExtender { get; private set; }
     internal static bool HasEasyCraft { get; private set; }
+    internal static bool HasRadialMenu { get; private set; }
 
     private void Awake()
     {
@@ -56,6 +57,14 @@ public class Plugin : BaseUnityPlugin
 
         ConsoleCommands.Register();
         QoLLog.Info(Category.Core, "Console commands registered");
+
+        // Eager radial-menu detekce - DetectExternalMods bezi az ve Start(), ale
+        // tab registrace v Awake potrebuje vedet jestli ma vytvaret tabs nebo
+        // umistit upgrady primo do rootu (Workbench bez radialiho menu prekryva
+        // tabs). Eager check nemusi videt vsechny pluginy ale radial menu mody
+        // se obvykle loadi brzo.
+        HasRadialMenu = FindPlugin(new[] { "radialtabs", "radialcrafting", "bettercraftmenu", "guibetter" }, out var rmEarlyInfo);
+        QoLLog.Info(Category.Core, $"Eager radial menu detection: {(HasRadialMenu ? rmEarlyInfo : "not found, will flatten Workbench tabs")}");
 
         // Registrace custom TechTypes (musi byt v Awake, drive nez hra vytvori craft tree).
         if (cfg.SeamothTurboEnabled)
@@ -144,6 +153,7 @@ public class Plugin : BaseUnityPlugin
         HasBagEquipment = FindPlugin(new[] { "bagequipment" }, out var beInfo);
         HasSlotExtender = FindPlugin(new[] { "slotextender" }, out var seInfo);
         HasEasyCraft = FindPlugin(new[] { "easycraft" }, out var ecInfo);
+        HasRadialMenu = FindPlugin(new[] { "radialtabs", "radialcrafting", "bettercraftmenu", "guibetter" }, out var rmInfo);
 
         LogDetection("CustomizedStorage", "locker resize", HasCustomizedStorage, csInfo);
         LogDetection("AdvancedInventory", "scrollable container", HasAdvancedInventory, aiInfo);

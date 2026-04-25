@@ -2,6 +2,15 @@
 
 Vsechny zmeny v Inferius Quality of Life modu.
 
+## v0.3.1
+
+### Opraveno
+- **Reinforced/Hyper baterie + power celly nesly do nabijecek** - `BatteryCharger.compatibleTech` + `PowerCellCharger.compatibleTech` jsou staticky HashSets s vanilla TechTypes; nase custom typy nebyly v listu. Navic Nautilus `CloneTemplate` neprenasi `EquipmentType` z TechData. Fix: `BatteryItems.InjectIntoChargers()` pridava nase TT do obou HashSetu + explicitni `prefab.SetEquipment(EquipmentType.BatteryCharger / PowerCellCharger)`.
+- **Workbench taby se prekryvaji bez radial menu modu** - kdyz hrac nema radial-menu mod (`RadialTabs` / `BetterCraftMenu` / podobne), Modification Station UI prekryva nase custom taby. Fix: detekce radial menu v Plugin.Awake, pri absenci se Workbench taby NEvytvari a upgrady (Backpacks Medium/Large, Hyper baterie, Compressor, Seamoth Turbo MK2/MK3, Tank Welder, Teleport Efficiency chipy) jdou primo do rootu Workbenche. S radial menu modem se chova standardne s organizovanymi taby.
+
+### Zmeneno
+- **Inventory Compressor docasne skryt z craftingu** - novy toggle `Craftable (Experimental)` v Options (default OFF). Chip uz neni v craft tree ani v PDA. TechType se stale registruje, takze `spawn InferiusCompressor` v konzoli funguje. Pokud hrac chip nikdy neosadi, zadna persistentni data se nevytvori = bezpecne k odinstalaci. Pokud ho osadi a zkomprimuje polozky, pri odinstalaci bez predchoziho `qol_compressor_decompress_all` hrozi ztrata polozek - oznaceno jako experimentalni.
+
 ## v0.3.0
 
 ### Pridano

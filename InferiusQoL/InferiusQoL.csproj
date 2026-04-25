@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<AssemblyName>InferiusQoL</AssemblyName>
 		<Product>Inferius Quality of Life</Product>
-		<Version>0.3.0</Version>
+		<Version>0.3.1</Version>
 		<OutputPath>$(SolutionDir)bin\$(Configuration)\$(AssemblyName)\</OutputPath>
 		<RootNamespace>InferiusQoL</RootNamespace>
 		<DeployToGame Condition="'$(DeployToGame)' == ''">true</DeployToGame>

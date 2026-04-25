@@ -16,7 +16,7 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 [list]
 [*][b]Enlarge player inventory[/b] - add configurable rows/columns. Runtime updates when you move the slider.
 [*][b]Bigger lockers[/b] - resize vanilla Locker and Wall Locker to custom dimensions (default 6x8 / 4x5). Works both on newly-built and existing lockers.
-[*][b]Inventory Compressor chip[/b] - equip in Chip slot to shrink every non-blacklisted item to 1x1. Persistent across save/load, base storage, vehicles. User-editable blacklist (fish, eggs, batteries, tanks).
+[*][b]Inventory Compressor chip[/b] [i](Experimental, temporarily hidden from crafting since v0.3.1)[/i] - equip in Chip slot to shrink every non-blacklisted item to 1x1. Persistent across save/load, base storage, vehicles. User-editable blacklist (fish, eggs, batteries, tanks). [b]Hidden from crafting by default[/b] - toggle [code]Craftable (Experimental)[/code] in Options or [code]spawn InferiusCompressor[/code] in console. [b]Warning[/b]: once equipped, compressed items get persistent markers. Uninstalling without running [code]qol_compressor_decompress_all[/code] first may cause item loss. If you never equip the chip, no persistent data is created - safe to uninstall.
 [/list]
 
 [b]Backpacks[/b] (3 tiers)
@@ -132,7 +132,7 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 [list]
 [*][b]Zvetseny inventar hrace[/b] - pridani konfigurovatelnych radku/sloupcu. Zmena slideru v Options se projevi ihned.
 [*][b]Vetsi skrine[/b] - meni vanilla Locker a Wall Locker na vlastni rozmery (default 6x8 / 4x5). Funguje na nove postavene i existujici skrine.
-[*][b]Inventory Compressor chip[/b] - osad do Chip slotu a vsechny polozky mimo blacklist se zmensi na 1x1. Perzistentni napric save/load, skrinemi i vozidly. Uzivatelsky editovatelny blacklist (ryby, vajicka, baterie, lahve).
+[*][b]Inventory Compressor chip[/b] [i](Experimentalni, od v0.3.1 docasne skryt z craftingu)[/i] - osad do Chip slotu a vsechny polozky mimo blacklist se zmensi na 1x1. Perzistentni napric save/load, skrinemi i vozidly. Uzivatelsky editovatelny blacklist (ryby, vajicka, baterie, lahve). [b]Docasne skryt z craftingu[/b] - lze zapnout v Options ([code]Craftable (Experimentalni)[/code] toggle) nebo spawnout [code]spawn InferiusCompressor[/code] v konzoli. [b]Pozor[/b]: po osazeni se vytvori persistentni markery. Pri odinstalaci bez predchoziho [code]qol_compressor_decompress_all[/code] muze dojit ke ztrate polozek. Pokud chip nikdy neosadis, zadna persistentni data se nevytvori - bezpecne k odinstalaci.
 [/list]
 
 [b]Batohy[/b] (3 tiery)

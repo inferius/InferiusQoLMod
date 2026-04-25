@@ -40,6 +40,8 @@ public static class TankWelderItems
 
     public static void RegisterTabs()
     {
+        if (!Plugin.HasRadialMenu) return;
+
         var label = InferiusQoL.Localization.L.GetOrFallback(
             "InferiusQoL.Tab.TankWelder",
             "Merged Tanks");
@@ -173,10 +175,11 @@ public static class TankWelderItems
 
         prefab.SetPdaGroupCategory(TechGroup.Personal, TechCategory.Equipment);
         prefab.SetUnlock(unlockAfter);
-        prefab.SetRecipe(recipe)
+        var crafting = prefab.SetRecipe(recipe)
             .WithFabricatorType(CraftTree.Type.Workbench)
-            .WithStepsToFabricatorTab("TankWelderMenu")
             .WithCraftingTime(8f);
+        if (Plugin.HasRadialMenu)
+            crafting.WithStepsToFabricatorTab("TankWelderMenu");
         prefab.SetEquipment(EquipmentType.Tank)
             .WithQuickSlotType(QuickSlotType.Passive);
 
