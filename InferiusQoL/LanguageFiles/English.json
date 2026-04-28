@@ -63,10 +63,16 @@
   "  Efficiency chip MK1 cost (%)": "  Efficiency chip MK1 cost (%)",
   "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cost (%)",
   "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cost (%)",
+  "  Always free (no energy cost)": "  Always free (no energy cost)",
 
   "Enable Locker Mover": "Enable Locker Mover",
   "  Keybind": "  Keybind",
   "  Require empty hands": "  Require empty hands",
+
+  "Enable Inventory Viewer": "Enable Inventory Viewer",
+  "  Toggle key": "  Toggle key",
+  "  Scan range (m)": "  Scan range (m)",
+  "  Include player inventory": "  Include player inventory",
 
   "Enable AutoCraft": "Enable AutoCraft",
   "  Use nearby storage": "  Use nearby storage",
@@ -100,6 +106,7 @@
   "InferiusQoL.Status.TeleportBeacon": "TeleportBeacon:",
   "InferiusQoL.Status.LockerMover": "LockerMover:",
   "InferiusQoL.Status.AutoCraft": "AutoCraft:",
+  "InferiusQoL.Status.InventoryViewer": "InventoryViewer:",
   "InferiusQoL.Status.OxygenRefill": "OxygenRefill:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Current log level: {0}. Usage: qol_log_level <None|Info|Debug|Trace>",

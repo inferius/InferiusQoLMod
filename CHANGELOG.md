@@ -2,6 +2,16 @@
 
 Vsechny zmeny v Inferius Quality of Life modu.
 
+## v0.4.1
+
+### Pridano
+- **Inventory Viewer** - aggregate prehled vsech polozek napric Inventory + StorageContainery (lockery, carryally vc. drzenych v inventari) v dosahu. Hotkey toggle (default `I`, konfigurovatelny v Options). IMGUI okno s filtrem, refreshem, pocty per TechType + pocty containeru. Iteruje pres `Resources.FindObjectsOfTypeAll<StorageContainer>` aby zachytil i inactive instances.
+- **Teleport zdarma v Creative/Freedom modu** - automaticky detekuje pres `GameModeUtils.RequiresPower()`, skip energy check + drain. Take novy toggle `Always free (no energy cost)` v Options pro Survival/Hardcore (default OFF).
+
+### Opraveno
+- **Teleport Beacon byl navic v Mobile Vehicle Bay** - smazan `WithFabricatorType(CraftTree.Type.Constructor)` ktery duplikoval beacon do MVB craft tree. Habitat Builder zahrnuti zustava pres `TechGroup.InteriorPieces`.
+- **Cursor unlock pri otevreni Inventory Viewer okna** - prvotne pouzite `Cursor.lockState` nestacilo (Subnautica FPS input modul re-locknul kazdy frame). Fix: `UWE.Utils.lockCursor` flag (stejny pattern jako vanilla PDA / TeleportBeaconUI).
+
 ## v0.3.3
 
 ### Opraveno

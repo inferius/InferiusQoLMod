@@ -81,15 +81,22 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
         var thisRelay = GetComponentInParent<PowerRelay>();
         var targetRelay = target.GetComponentInParent<PowerRelay>();
 
-        if (!HasEnoughPower(thisRelay, cfg.TeleportMinBasePowerPercent))
+        // Free teleport: Creative/Freedom mode (vanilla GameModeUtils.RequiresPower
+        // = false) NEBO user-toggle TeleportAlwaysFree. Skip power check + drain.
+        bool freeMode = cfg.TeleportAlwaysFree || !GameModeUtils.RequiresPower();
+
+        if (!freeMode)
         {
-            failReason = "Source base power too low";
-            return false;
-        }
-        if (!HasEnoughPower(targetRelay, cfg.TeleportMinBasePowerPercent))
-        {
-            failReason = "Target base power too low";
-            return false;
+            if (!HasEnoughPower(thisRelay, cfg.TeleportMinBasePowerPercent))
+            {
+                failReason = "Source base power too low";
+                return false;
+            }
+            if (!HasEnoughPower(targetRelay, cfg.TeleportMinBasePowerPercent))
+            {
+                failReason = "Target base power too low";
+                return false;
+            }
         }
 
         var distance = Vector3.Distance(transform.position, target.transform.position);
@@ -104,8 +111,11 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
         var totalSourceCost = baseCost * 0.5f;
         var totalTargetCost = baseCost * 0.5f;
 
-        DrainPower(thisRelay, totalSourceCost);
-        DrainPower(targetRelay, totalTargetCost);
+        if (!freeMode)
+        {
+            DrainPower(thisRelay, totalSourceCost);
+            DrainPower(targetRelay, totalTargetCost);
+        }
 
         // Teleport destination = kousek pred target beacon (forward), aby hrac
         // dopadl na konzistentni misto vedle beaconu a ne do/na nej.
@@ -142,6 +152,8 @@ public class TeleportBeaconBehavior : MonoBehaviour, IHandTarget
     public float EstimateCost(TeleportBeaconBehavior target)
     {
         var cfg = InferiusConfig.Instance;
+        if (cfg.TeleportAlwaysFree || !GameModeUtils.RequiresPower()) return 0f;
+
         var distance = Vector3.Distance(transform.position, target.transform.position);
         var distanceCost = (distance / 100f) * cfg.TeleportCostPerHundredMeters;
         var base_ = cfg.TeleportSourceCostJoules + cfg.TeleportTargetCostJoules + distanceCost;

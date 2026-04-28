@@ -239,6 +239,11 @@ public class InferiusConfig : ConfigFile
     [Slider("  Efficiency chip MK3 cost (%)", 5, 100, DefaultValue = 25, Step = 5, Order = 908)]
     public int TeleportEfficiencyMK3Percent = 25;
 
+    // Creative/Freedom mode = teleport zdarma automaticky (vanilla nezadava power).
+    // Survival/Hardcore = standardne plati, ale toggle ho prepne na zdarma.
+    [Toggle("  Always free (no energy cost)", Order = 909)]
+    public bool TeleportAlwaysFree = false;
+
     public float GetEfficiencyMultiplier(int tier) => tier switch
     {
         1 => TeleportEfficiencyMK1Percent / 100f,
@@ -263,6 +268,24 @@ public class InferiusConfig : ConfigFile
 
     [Toggle("  Require empty hands", Order = 1002)]
     public bool LockerMoverRequireEmptyHands = false;
+
+    // =====================================================================
+    // Inventory Viewer (aggregate prehled napric containery)
+    // =====================================================================
+
+    [Toggle("Enable Inventory Viewer", Order = 1300)]
+    public bool InventoryViewerEnabled = true;
+
+    [Choice("  Toggle key",
+        new[] { "I", "J", "K", "L", "M", "N", "O", "P", "U", "Y" },
+        Order = 1301)]
+    public string InventoryViewerKey = "I";
+
+    [Slider("  Scan range (m)", 0, 500, DefaultValue = 100, Step = 10, Order = 1302)]
+    public int InventoryViewerRangeMeters = 100;
+
+    [Toggle("  Include player inventory", Order = 1303)]
+    public bool InventoryViewerIncludePlayer = true;
 
     // =====================================================================
     // AutoCraft (integrace EasyCraft)

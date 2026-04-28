@@ -10,6 +10,7 @@ using InferiusQoL.Console;
 using InferiusQoL.Features.Backpacks;
 using InferiusQoL.Features.Batteries;
 using InferiusQoL.Features.Compressor;
+using InferiusQoL.Features.InventoryViewer;
 using InferiusQoL.Features.LockerMover;
 using InferiusQoL.Features.SeamothTurbo;
 using InferiusQoL.Features.TankWelder;
@@ -110,6 +111,11 @@ public class Plugin : BaseUnityPlugin
         if (cfg.LockerMoverEnabled)
         {
             LockerMoverFeature.Init();
+        }
+
+        if (cfg.InventoryViewerEnabled)
+        {
+            InventoryViewerFeature.Init();
         }
 
         QoLLog.Info(Category.Core, "Awake completed (detekce cizich modu probehne v Start())");

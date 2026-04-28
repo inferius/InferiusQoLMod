@@ -81,6 +81,9 @@ public static class TeleportBeaconItem
 
         prefab.SetPdaGroupCategory(TechGroup.InteriorPieces, TechCategory.InteriorPiece);
 
+        // Habitat Builder buildable - NEPOUZIVAT WithFabricatorType.
+        // CraftTree.Type.Constructor = Mobile Vehicle Bay (omyl driv), interior pieces
+        // se do Habitat Builderu pridavaji automaticky pres TechGroup.InteriorPieces.
         prefab.SetRecipe(new RecipeData
         {
             craftAmount = 1,
@@ -92,9 +95,7 @@ public static class TeleportBeaconItem
                 new Ingredient(TechType.Polyaniline, 1),
                 new Ingredient(TechType.Aerogel, 1),
             }
-        })
-        .WithFabricatorType(CraftTree.Type.Constructor)
-        .WithCraftingTime(10f);
+        });
 
         prefab.Register();
         TechType = info.TechType;

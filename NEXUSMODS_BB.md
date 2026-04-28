@@ -79,6 +79,13 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 [*]No free oxygen underwater - refill only triggers where vanilla already breathes you (surface + pressurised interiors).
 [/list]
 
+[b]Inventory Viewer[/b] [i](since v0.4.1)[/i]
+[list]
+[*]Hotkey-toggleable overlay (default [code]I[/code]) showing [b]all items aggregated[/b] across your Inventory + nearby StorageContainers (lockers, carryalls including ones held in inventory).
+[*]Search filter, item counts per TechType, container counts.
+[*]Range configurable (0 = no limit).
+[/list]
+
 [size=4][b]Compatibility[/b][/size]
 
 The mod detects and respects these other mods:
@@ -193,6 +200,13 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 [*]Rychlejsi doplneni O2 tanku po vynoru nad hladinu nebo v moonpoolu/habitatu. Vanilla = 30 units/sec, default zde 120/sec (konfigurovatelne az 300).
 [*]Toggle: doplnit [b]vsechny lahve v inventari[/b], ne jen equipnutou.
 [*]Zadny kyslik zdarma pod vodou - refill se spousti jen tam, kde te vanilla i tak dycha (hladina + pressurizovane interiery).
+[/list]
+
+[b]Prehled inventare (Inventory Viewer)[/b] [i](od v0.4.1)[/i]
+[list]
+[*]Hotkey toggleable overlay (default [code]I[/code]) - [b]agregovany seznam vsech polozek[/b] napric Inventarem + okolnimi StorageContainery (lockery, carryally vc. drzenych v inventari).
+[*]Search filter, pocty per TechType, pocty kontejneru.
+[*]Konfigurovatelny dosah (0 = bez limitu).
 [/list]
 
 [size=4][b]Kompatibilita[/b][/size]

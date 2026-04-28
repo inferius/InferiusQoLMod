@@ -17,6 +17,7 @@ Modularni QoL balicek pro Subnauticu. Jeden mod obsahuje vsechna zlepseni nize -
 | **Locker Mover** *(od v0.2.0)* | Stehovani plnych skrini. Zamer na Locker/Wall Locker/Waterproof Locker/Carryall + stisk klavesy (default `G`) -> obsah do clipboardu. Stara skrin prazdna = deconstruct bezne. Opakovany stisk na nove prazdne skrini stejneho typu = obsah se presype zpet. Plne kompatibilni s Inventory Compressorem (slisovane polozky zustanou 1x1). Single-slot, in-memory (v1 neperzistuje pres save/quit). |
 | **AutoCraft** *(od v0.3.0, port EasyCraft)* | Fabricator/Workbench/Modification Station/Habitat Builder cerpaji suroviny z okolnich skrini (default Range 100m, konfigurovatelne 50-500m). Rekurzivni auto-craft chybejicich sub-ingredienci (hloubka 5). Lepsi ingredient tooltipy s aktualnim pockem. Shift+klik = x5 batch, Ctrl+klik = x10 batch. Craft speed slider 50-500% (zrychleni = vyssi spotreba). Return surplus do inventare nebo Auto-sorter lockeru. |
 | **Oxygen Auto-Refill** *(od v0.3.0)* | Rychlejsi doplneni O2 tanku pri vynoru nad hladinu nebo v moonpoolu/habitatu. Konfigurovatelna rate (vanilla 30/s, default 120/s). Toggle pro refill vsech lahvi v inventari (ne jen equipnute). |
+| **Inventory Viewer** *(od v0.4.1)* | Aggregate prehled napric inventarem + okolnimi skrinemi. Hotkey toggle (default `I`). Filter, count per TechType, count containeru. Iteruje i inactive Carryally drzene v inventari. |
 
 ## Detekce konfliktu
 

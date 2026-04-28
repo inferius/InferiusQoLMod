@@ -45,6 +45,7 @@ public static class ConsoleCommands
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.TeleportBeacon"),-18} {OnOff(c.TeleportBeaconEnabled)} ({c.TeleportSourceCostJoules}+{c.TeleportTargetCostJoules} J, cd {c.TeleportCooldownSeconds}s, min {c.TeleportMinBasePowerPercent}%)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.LockerMover"),-18} {OnOff(c.LockerMoverEnabled)} (key {c.LockerMoverKey}, clipboard: {(InferiusQoL.Features.LockerMover.LockerMoverClipboard.HasContent ? $"{InferiusQoL.Features.LockerMover.LockerMoverClipboard.ItemCount} items ({InferiusQoL.Features.LockerMover.LockerMoverClipboard.SourceTechType})" : "empty")})");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.AutoCraft"),-18} {OnOff(c.AutoCraftEnabled)} (storage: {c.AutoCraftUseStorage}, return: {c.AutoCraftReturnSurplus}, tooltips: {OnOff(c.AutoCraftBetterTooltips)})");
+        sb.AppendLine($"  {L.Get("InferiusQoL.Status.InventoryViewer"),-18} {OnOff(c.InventoryViewerEnabled)} (key {c.InventoryViewerKey}, range {c.InventoryViewerRangeMeters}m)");
         sb.AppendLine($"  {L.Get("InferiusQoL.Status.OxygenRefill"),-18} {OnOff(c.OxygenRefillEnabled)} ({c.OxygenRefillRate} units/s)");
         return sb.ToString();
     }

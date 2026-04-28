@@ -61,6 +61,11 @@ A modular Quality-of-Life package for Subnautica. One mod, many improvements - a
 - Toggle: refill **all oxygen tanks in your inventory**, not just the equipped one.
 - No free oxygen underwater - refill only triggers where vanilla already breathes you (surface + pressurised interiors).
 
+**Inventory Viewer** *(since v0.4.1)*
+- Hotkey-toggleable overlay (default `I`) showing **all items aggregated** across your Inventory + nearby StorageContainers (lockers, carryalls including ones held in inventory).
+- Search filter, item counts per TechType, container counts.
+- Range configurable (0 = no limit).
+
 ### Compatibility
 
 The mod detects and respects these other mods:
@@ -150,6 +155,11 @@ Built on top of BepInEx, Nautilus and Harmony. Localization contributors welcome
 - Rychlejší doplnění O2 tanku po vynoru nad hladinu nebo v moonpoolu/habitatu. Vanilla = 30 units/sec, default zde 120/sec (konfigurovatelné až 300).
 - Toggle: doplnit **všechny lahve v inventáři**, ne jen equipnutou.
 - Žádný kyslík zdarma pod vodou - refill se spouští jen tam, kde tě vanilla i tak dýchá (hladina + pressurizované interiéry).
+
+**Přehled inventáře (Inventory Viewer)** *(od v0.4.1)*
+- Hotkey toggleable overlay (default `I`) - **agregovaný seznam všech položek** napříč Inventářem + okolními StorageContainery (lockery, carryally včetně držených v inventáři).
+- Search filter, počty per TechType, počty kontejnerů.
+- Konfigurovatelný dosah (0 = bez limitu).
 
 ### Kompatibilita
 

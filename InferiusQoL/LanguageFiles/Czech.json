@@ -71,10 +71,16 @@
   "  Efficiency chip MK1 cost (%)": "  Efficiency chip MK1 cena (%)",
   "  Efficiency chip MK2 cost (%)": "  Efficiency chip MK2 cena (%)",
   "  Efficiency chip MK3 cost (%)": "  Efficiency chip MK3 cena (%)",
+  "  Always free (no energy cost)": "  Vždy zdarma (bez energie)",
 
   "Enable Locker Mover": "Povolit Stěhování skříní",
   "  Keybind": "  Klávesa",
   "  Require empty hands": "  Vyžadovat prázdné ruce",
+
+  "Enable Inventory Viewer": "Povolit Přehled inventáře",
+  "  Toggle key": "  Klávesa pro otevření",
+  "  Scan range (m)": "  Dosah skenu (m)",
+  "  Include player inventory": "  Včetně inventáře hráče",
 
   "Enable AutoCraft": "Povolit AutoCraft",
   "  Use nearby storage": "  Používat okolní úložiště",
@@ -108,6 +114,7 @@
   "InferiusQoL.Status.TeleportBeacon": "Teleport Beacon:",
   "InferiusQoL.Status.LockerMover": "Stěhování skříní:",
   "InferiusQoL.Status.AutoCraft": "AutoCraft:",
+  "InferiusQoL.Status.InventoryViewer": "Přehled inventáře:",
   "InferiusQoL.Status.OxygenRefill": "Kyslík refill:",
 
   "InferiusQoL.Console.LogLevelCurrent": "Aktuální úroveň logu: {0}. Použití: qol_log_level <None|Info|Debug|Trace>",
